@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    
+    <h2>我是dashboard</h2>
   </div>
 </template>
 

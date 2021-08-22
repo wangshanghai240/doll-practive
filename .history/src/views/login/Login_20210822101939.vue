@@ -128,6 +128,5 @@ export default {
 }
 .demo-ruleForm .logins .bgc {
   background: rgb(82, 224, 117);
-  border-color: rgb(82, 224, 117);
 }
 </style>

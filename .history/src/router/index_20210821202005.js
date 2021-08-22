@@ -49,7 +49,7 @@ VueRouter.prototype.push = function push(location) {
 }
 
 // 全局导航守卫(登陆验证)
-// router.beforeEach((to, from, next) =>{
+router.beforeEach((to, from, next) =>{
     // 如果要请求的路径是admin
     // if(to.path == '/admin'){
         // 判断用户是否登录，有token说明登录了
@@ -66,21 +66,16 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// router.beforeEach((to, from, next) =>{
-    // 如何要跳转到登陆页面
-    // if(to.path == '/login'){
-        // 则直接放行
-        // next()
-    // }else{
-        // 如果要进入其他页面，则需要验证是否有token，有说明登陆了
-        // if(window.sessionStorage.getItem('token')){
-            // next('/admin')
-            // 没有token
-        // }else{
-            // 则重定向到登陆页面
-//             next('/login')
-//         }
-//     }
-// })
+router.beforeEach((to, from, next) =>{
+    if(to.path == '/login'){
+        next()
+    }else{
+        if(window.sessionStorage.getItem('token')){
+            next('/admin')
+        }else{
+            next('/login')
+        }
+    }
+})
 // 导出路由对象，暴露接口
 export default router

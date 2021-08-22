@@ -93,7 +93,7 @@ export default {
           }
         });
       } else {
-        this.$message.error("亲~ ~用户名或密码不能为空哦");
+        this.$message.error("亲~~用户名或密码不能为空哦");
       }
       this.isactive = !this.isactive;
     },
@@ -128,6 +128,5 @@ export default {
 }
 .demo-ruleForm .logins .bgc {
   background: rgb(82, 224, 117);
-  border-color: rgb(82, 224, 117);
 }
 </style>

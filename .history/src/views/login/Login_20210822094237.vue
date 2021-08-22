@@ -18,7 +18,6 @@
           type="text"
           v-model="ruleForm.username"
           clearable
-          prefix-icon="el-icon-s-custom"
         ></el-input>
       </el-form-item>
 
@@ -29,7 +28,6 @@
           v-model="ruleForm.pwd"
           clearable
           show-password
-          prefix-icon='el-icon-key'
         ></el-input>
       </el-form-item>
 
@@ -73,7 +71,7 @@ export default {
   methods: {
     // 事件监听相关
     loginhome() {
-      if (this.ruleForm.username !== '' && this.ruleForm.pwd !== '') {
+      if (this.ruleForm !== null) {
         // 发送网络请求
         login(this.ruleForm.username, this.ruleForm.pwd).then((res) => {
           // 获取token
@@ -93,7 +91,7 @@ export default {
           }
         });
       } else {
-        this.$message.error("亲~ ~用户名或密码不能为空哦");
+        this.$message.error("请输入正确的用户名或密码");
       }
       this.isactive = !this.isactive;
     },
@@ -128,6 +126,5 @@ export default {
 }
 .demo-ruleForm .logins .bgc {
   background: rgb(82, 224, 117);
-  border-color: rgb(82, 224, 117);
 }
 </style>
