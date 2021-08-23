@@ -24,7 +24,7 @@
             active-text-color="#C00FFCC"
             default-active="/admin/dashboard"
             :router="true"
-            :unique-opened='true'
+            unique-opened
             :collapse="iscollapse"
             :collapse-transition="false"
           >

@@ -14,8 +14,6 @@ const OrderMeeting = () => import('views/admin/ordermeeting/OrderMeeting')
 const OrderShop = () => import('views/admin/ordershop/OrderShop')
 const User = () => import('views/admin/user/User')
 const SysLog = () => import('views/admin/syslog/SysLog')
-const ReqList = () =>import('views/admin/fabric/childComp/ReqList')
-const ShopList = () =>import('views/admin/fabric/childComp/ShopList')
 
 // 路由列表(路径，组件映射关系)
 let routes = [{
@@ -49,35 +47,6 @@ let routes = [{
             {
                 path: 'fabric',
                 component: Fabric,
-                name:'面料',
-                children:[
-                    {
-                        path:'reqlist',
-                        component:ReqList,
-                        name:'需求列表',
-                        meta:{
-                            breadcrumb:[
-                                {
-                                    path:'/reqlist',
-                                    name:'需求列表'
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        path:'shoplist',
-                        component:ShopList,
-                        name:'采购列表',
-                        meta:{
-                            breadcrumb:[
-                                {
-                                    path:'/shoplist',
-                                    name:'采购列表'
-                                }
-                            ]
-                        }
-                    }
-                ],
                 meta: {
                     breadcrumb: [{
                         path: '/fabric',
@@ -88,7 +57,6 @@ let routes = [{
             {
                 path: 'ordermeeting',
                 component: OrderMeeting,
-                name:'订货会',
                 meta: {
                     breadcrumb: [{
                         path: '/ordermeeting',
@@ -99,7 +67,6 @@ let routes = [{
             {
                 path: 'ordershop',
                 component: OrderShop,
-                name:'商品列表',
                 meta: {
                     breadcrumb: [{
                         path: '/ordershop',
@@ -110,7 +77,6 @@ let routes = [{
             {
                 path: 'user',
                 component: User,
-                name:'用户列表',
                 meta: {
                     breadcrumb: [{
                         path: '/user',
@@ -121,7 +87,6 @@ let routes = [{
             {
                 path: 'syslog',
                 component: SysLog,
-                name:'系统日志',
                 meta: {
                     breadcrumb: [{
                         path: '/syslog',

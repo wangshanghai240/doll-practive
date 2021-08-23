@@ -24,7 +24,7 @@
             active-text-color="#C00FFCC"
             default-active="/admin/dashboard"
             :router="true"
-            :unique-opened='true'
+            unique-opened
             :collapse="iscollapse"
             :collapse-transition="false"
           >
@@ -40,11 +40,11 @@
                 <span>面料</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/admin/fabric/reqlist">
+                <el-menu-item index="/admin/fabric">
                   <img src="~assets/image/navmenu/xuqiuqingdan.svg" alt="" />
                   <span>需求清单</span>
                 </el-menu-item>
-                <el-menu-item index="/admin/fabric/shoplist">
+                <el-menu-item index="/admin/fabric">
                   <img src="~assets/image/navmenu/caigouliebiao.svg" alt="" />
                   <span>采购列表</span>
                 </el-menu-item>

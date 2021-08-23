@@ -17,7 +17,7 @@ export default {
   name: "BreadCrumb",
   computed:{
       breadcrumb(){
-          return this.$route.matched.filter(item =>{item.name})
+          return this.$route.meta.breadcrumb
       }
   },
   data(){

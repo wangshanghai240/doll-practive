@@ -30,6 +30,7 @@ let routes = [{
     {
         path: '/admin',
         component: Admin,
+        name:'ccc',
         children: [{
                 path: 'dashboard',
                 component: Dashboard,
