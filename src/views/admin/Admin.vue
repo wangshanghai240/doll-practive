@@ -1,45 +1,73 @@
 <template>
   <div class="admin">
     <el-container>
-      <el-header>Header</el-header>
+      <!-- 头部 -->
+      <el-header class="header">
+        <!-- logo组件 -->
+        <logo></logo>
+        <!-- <bread-crumb></bread-crumb> -->
+      </el-header>
+      
+        <bread-crumb class="breadcrumb"></bread-crumb>
+      
+      <!-- 布局容器 -->
       <el-container>
-        <el-aside width="200px">
+        <!-- 侧边栏 -->
+        <el-aside :width="iscollapse ? '64px' : '200px'">
+          <!-- 折叠按钮 -->
+          <div class="toggle" @click="togglecollapse">
+            <span>|||</span>
+          </div>
           <!-- 导航菜单 -->
           <el-menu
             class="el-menu-vertical-demo"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b"
+            active-text-color="#C00FFCC"
+            :router="true"
+            unique-opened
+            :collapse="iscollapse"
+            :collapse-transition="false"
           >
-            <el-submenu index="1">
+            <!-- 首页 -->
+            <el-menu-item index="/admin/dashboard">
+              <img src="~assets/image/navmenu/home-ff.svg" alt="" />
+              <span>首页(表单模板)</span>
+            </el-menu-item>
+            <!-- 面料菜单 -->
+            <el-submenu index="/admin/dashboard">
               <template slot="title">
-                <i class="el-icon-tickets"></i>
-                <span>表单模板</span>
+                <img src="~assets/image/navmenu/mianliao.svg" alt="" />
+                <span>面料</span>
               </template>
-              <!-- <el-menu-item-group>
-                <template slot="title">分组一</template>
-                <el-menu-item index="1-1">选项1</el-menu-item>
-                <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item-group>
+                <el-menu-item index="/admin/fabric">
+                  <img src="~assets/image/navmenu/xuqiuqingdan.svg" alt="" />
+                  <span>需求清单</span>
+                </el-menu-item>
+                <el-menu-item index="/admin/fabric">
+                  <img src="~assets/image/navmenu/caigouliebiao.svg" alt="" />
+                  <span>采购列表</span>
+                </el-menu-item>
               </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="1-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="1-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="1-4-1">选项1</el-menu-item>
-              </el-submenu> -->
             </el-submenu>
-            <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              <span slot="title">导航二</span>
+            <!-- 订货会 -->
+            <el-menu-item index="/admin/ordermeeting">
+              <img src="~assets/image/navmenu/dinghuohui.svg" alt="" />
+              <span slot="title">订货会</span>
             </el-menu-item>
-            <el-menu-item index="3">
-              <i class="el-icon-document"></i>
-              <span slot="title">导航三</span>
+            <!-- 商品列表 -->
+            <el-menu-item index="/admin/ordershop">
+              <img src="~assets/image/navmenu/shangpinliebiao.svg" alt="" />
+              <span slot="title">商品列表</span>
             </el-menu-item>
-            <el-menu-item index="4">
-              <i class="el-icon-setting"></i>
-              <span slot="title">导航四</span>
+            <!-- 用户列表 -->
+            <el-menu-item index="/admin/user">
+              <img src="~assets/image/navmenu/xingzhuang1.svg" alt="" />
+              <span slot="title">用户列表</span>
+            </el-menu-item>
+            <!-- 日志列表 -->
+            <el-menu-item index="/admin/syslog">
+              <img src="~assets/image/navmenu/rizhiliebiao.svg" alt="" />
+              <span slot="title">日志列表</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
@@ -53,12 +81,59 @@
 </template>
 
 <script>
-// import Dashboard from './dashboard/Dashboard.vue'
+import Logo from "components/content/Logo.vue";
+import BreadCrumb from 'components/content/BreadCrumb.vue';
+
 export default {
-  components: {},
+  components: {
+    Logo,
+    BreadCrumb
+  },
   name: "Admin",
+  data() {
+    return {
+      iscollapse: false
+    };
+  },
+  methods: {
+    togglecollapse() {
+      this.iscollapse = !this.iscollapse;
+    }
+  },
 };
 </script>
 
 <style>
+.el-menu-vertical-demo {
+  background: #fff;
+  color: rgb(0, 0, 0);
+  border: none;
+}
+.el-menu-vertical-demo img {
+  vertical-align: center;
+  width: 20px;
+  margin-right: 12px;
+}
+.admin .header {
+  position: relative;
+  margin: 0 0 4px 0;
+  box-shadow: 0 2px 2px #e0e0e0;
+}
+.breadcrumb{
+  padding:8px 0;
+  margin:2px 20px;
+}
+.toggle {
+  height:22px;
+  text-align: center;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+.toggle span {
+  color: #c2c2c2;
+  line-height:22px;
+}
+.el-menu-item img{
+  width:20px;
+}
 </style>
