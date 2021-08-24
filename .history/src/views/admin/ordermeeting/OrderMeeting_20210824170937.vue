@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { getOrderMeeting } from 'network/ordermeeting/ordermeeting'
+import { getOrderMeeting } from 'network/ordermeeting'
 import ordersearch from 'views/admin/ordermeeting/ordermee/Ordersearch.vue'
   import OrderTab from './ordermee/OrderTab.vue'
 export default {

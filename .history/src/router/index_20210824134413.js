@@ -33,7 +33,10 @@ let routes = [{
         component: Admin,
         children: [{
                 path: 'dashboard',
-                component: Dashboard
+                component: Dashboard,
+                meta: {
+                    requireAuth: true
+                }
             },
             {
                 path: '',
@@ -46,34 +49,76 @@ let routes = [{
                 children: [{
                         path: 'reqlist',
                         component: ReqList,
-                        name: '需求列表'
+                        name: '需求列表',
+                        meta: {
+                            breadcrumb: [{
+                                path: '/reqlist',
+                                name: '需求列表'
+                            }]
+                        }
                     },
                     {
                         path: 'shoplist',
                         component: ShopList,
                         name: '采购列表',
+                        meta: {
+                            breadcrumb: [{
+                                path: '/shoplist',
+                                name: '采购列表'
+                            }]
+                        }
                     }
-                ]
+                ],
+                meta: {
+                    breadcrumb: [{
+                        path: '/fabric',
+                        name: '面料'
+                    }]
+                }
             },
             {
                 path: 'ordermeeting',
                 component: OrderMeeting,
-                name: '订货会'
+                name: '订货会',
+                meta: {
+                    breadcrumb: [{
+                        path: '/ordermeeting',
+                        name: '订货会'
+                    }]
+                }
             },
             {
                 path: 'ordershop',
                 component: OrderShop,
-                name: '商品列表'
+                name: '商品列表',
+                meta: {
+                    breadcrumb: [{
+                        path: '/ordershop',
+                        name: '商品列表'
+                    }]
+                }
             },
             {
                 path: 'user',
                 component: User,
-                name: '用户列表'
+                name: '用户列表',
+                meta: {
+                    breadcrumb: [{
+                        path: '/user',
+                        name: '用户列表'
+                    }]
+                }
             },
             {
                 path: 'syslog',
                 component: SysLog,
-                name: '系统日志'
+                name: '系统日志',
+                meta: {
+                    breadcrumb: [{
+                        path: '/syslog',
+                        name: '系统日志'
+                    }]
+                }
             }
         ],
         meta: {
@@ -96,6 +141,23 @@ VueRouter.prototype.push = function push(location) {
 }
 
 // 全局导航守卫(登陆验证)
+// router.beforeEach((to, from, next) =>{
+// 如果要请求的路径是admin
+// if(to.path == '/admin'){
+// 判断用户是否登录，有token说明登录了
+// if(sessionStorage.getItem('token')){
+// 就可以直接放行
+//     next()
+// }
+// 如果没有登录就重定向到登录页面
+//         else{
+//             next('/login')
+//         }
+//     }
+//     else{
+//         next()
+//     }
+// })
 // router.beforeEach((to, from, next) => {
 //     if(to.matched.some((r)=>{r.meta.requireAuth})){
 //         if(window.sessionStorage.getItem()){
@@ -111,12 +173,10 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// 登录验证
 router.beforeEach((to, from, next) => {
     // to:将要达到的路径
     // from:离开的路径
     // 如果访问/login直接放行
-    console.log(to.matched)
     if (to.path == '/login') return next()
     // 如果sessionStorage没有token，则重定向到登录页
     if (!sessionStorage.getItem('token')) return next('/login')

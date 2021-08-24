@@ -1,16 +1,14 @@
 <template>
   <div class="ordmet">
       <ordersearch></ordersearch>
-      <order-tab></order-tab>
   </div>
 </template>
 
 <script>
-import { getOrderMeeting } from 'network/ordermeeting/ordermeeting'
+import { getOrderMeeting } from 'network/ordermeeting'
 import ordersearch from 'views/admin/ordermeeting/ordermee/Ordersearch.vue'
-  import OrderTab from './ordermee/OrderTab.vue'
 export default {
-  components: { ordersearch,OrderTab },
+  components: { ordersearch },
     name:'OrderMeeting',
     data(){
         return{

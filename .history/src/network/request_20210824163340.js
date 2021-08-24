@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import store from 'store/index'
+import store from 'store/index'
 // 封装axios
 export function request(config) {
     let instance = axios.create({
@@ -9,7 +9,7 @@ export function request(config) {
     // 拦截请求
     instance.interceptors.request.use(config => {
         // 发送请求前将token加入header中
-        config.headers['Authorization'] = sessionStorage.getItem('token')
+        config.headers['Authorization'] = store.state.token
         // 返回config，否则后端无法接收到请求
         return config
     }, err => {

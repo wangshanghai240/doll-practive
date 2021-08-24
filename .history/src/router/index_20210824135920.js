@@ -31,7 +31,8 @@ let routes = [{
     {
         path: '/admin',
         component: Admin,
-        children: [{
+        children: [
+            {
                 path: 'dashboard',
                 component: Dashboard
             },
@@ -43,7 +44,8 @@ let routes = [{
                 path: 'fabric',
                 component: Fabric,
                 name: '面料',
-                children: [{
+                children: [
+                    {
                         path: 'reqlist',
                         component: ReqList,
                         name: '需求列表'

@@ -31,7 +31,8 @@ let routes = [{
     {
         path: '/admin',
         component: Admin,
-        children: [{
+        children: [
+            {
                 path: 'dashboard',
                 component: Dashboard
             },
@@ -43,7 +44,8 @@ let routes = [{
                 path: 'fabric',
                 component: Fabric,
                 name: '面料',
-                children: [{
+                children: [
+                    {
                         path: 'reqlist',
                         component: ReqList,
                         name: '需求列表'
@@ -111,12 +113,10 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// 登录验证
 router.beforeEach((to, from, next) => {
     // to:将要达到的路径
     // from:离开的路径
     // 如果访问/login直接放行
-    console.log(to.matched)
     if (to.path == '/login') return next()
     // 如果sessionStorage没有token，则重定向到登录页
     if (!sessionStorage.getItem('token')) return next('/login')

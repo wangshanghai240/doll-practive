@@ -5,7 +5,7 @@
       <el-breadcrumb-item :to="{path:''}">首页</el-breadcrumb-item>
       <el-breadcrumb-item 
       :to="{path:item.path}" 
-      v-for="item in breadcrumb" 
+      v-for="item in breadcrumb.splice(0,1)" 
       :key="item.path">{{ item.name }}
       </el-breadcrumb-item>
     </el-breadcrumb>

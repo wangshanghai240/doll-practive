@@ -2,11 +2,11 @@
   <div class="brdcmb">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>当前位置:</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{path:''}">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{path:'/admin/dashboard'}">首页</el-breadcrumb-item>
       <el-breadcrumb-item 
       :to="{path:item.path}" 
       v-for="item in breadcrumb" 
-      :key="item.path">{{ item.name }}
+      :key="item.path">{{ item[1].name }}
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>

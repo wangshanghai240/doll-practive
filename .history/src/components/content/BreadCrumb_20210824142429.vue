@@ -2,7 +2,7 @@
   <div class="brdcmb">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>当前位置:</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{path:''}">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{path:'/admin/dashboard'}">首页</el-breadcrumb-item>
       <el-breadcrumb-item 
       :to="{path:item.path}" 
       v-for="item in breadcrumb" 
@@ -15,7 +15,6 @@
 <script>
 export default {
   name: "BreadCrumb",
-  // 方式一：watch
   // 监听路由变化
   // watch:{
   //   $route:{
@@ -29,7 +28,6 @@ export default {
   // mounted(){
   //   this.getList()
   // },
-  // 方式二：计算属性
   computed:{
       breadcrumb(){
           return this.$route.matched

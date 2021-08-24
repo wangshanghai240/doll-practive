@@ -51,10 +51,10 @@ name:'Logout',
 }
 .logout .avtor .showinfo{
   display: none;
-  position: absolute;
+  /* position: absolute; */
   left:-20px;
   border-radius:4px;
-  /* z-index: 999 !important; */
+  z-index: 999 !important;
   box-shadow: 0 0 2px #d0d0d0;
   background:#fff;
   white-space: nowrap;

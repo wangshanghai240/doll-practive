@@ -50,6 +50,7 @@ name:'Logout',
   display: block;
 }
 .logout .avtor .showinfo{
+  height:300px;
   display: none;
   position: absolute;
   left:-20px;

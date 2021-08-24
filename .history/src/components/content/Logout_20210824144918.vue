@@ -34,7 +34,7 @@ name:'Logout',
   display: inline-block;
 }
 .logout .avtor{
-  position:absolute;
+  /* position:absolute; */
   top:50%;
   left:94%;
   transform:translateY(-50%)
@@ -51,7 +51,7 @@ name:'Logout',
 }
 .logout .avtor .showinfo{
   display: none;
-  position: absolute;
+  /* position: absolute; */
   left:-20px;
   border-radius:4px;
   /* z-index: 999 !important; */
