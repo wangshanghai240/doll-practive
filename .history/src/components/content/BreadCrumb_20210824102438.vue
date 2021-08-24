@@ -5,7 +5,7 @@
       <el-breadcrumb-item :to="{path:'/admin/dashboard'}">首页</el-breadcrumb-item>
       <el-breadcrumb-item 
       :to="{path:item.path}" 
-      v-for="item in navlist" 
+      v-for="item in breadcrumb" 
       :key="item.path">{{ item.name }}
       </el-breadcrumb-item>
     </el-breadcrumb>
@@ -15,34 +15,15 @@
 <script>
 export default {
   name: "BreadCrumb",
-  // 监听路由变化
-  watch:{
-    $route:{
-      handler(){
-        this.getList()
-      },
-      immediate:true
-    }
-  },
-  // 页面挂载之后就执行该方法
-  mounted(){
-    this.getList()
-  },
-  // computed:{
-  //     breadcrumb(){
-  //         return this.$route.matched.filter(item => item.name)
-  //     }
-  // },
-  data(){
-      return{
-        navlist:[]
+  computed:{
+      breadcrumb(){
+          return this.$route.matched.filter(item =>{item.name})
       }
   },
-  methods:{
-    getList(){
-      // 将处于活跃的路由(地址)保存在navlist
-      this.navlist = this.$route.matched.filter(item => item.name)
-    }
+  data(){
+      return{
+        //   breadcrumb:['首页','面料','订货会','商品列表','用户列表','日志列表']
+      }
   }
 };
 </script>

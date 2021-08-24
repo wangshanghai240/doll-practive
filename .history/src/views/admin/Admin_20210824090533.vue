@@ -6,7 +6,6 @@
         <!-- logo组件 -->
         <logo></logo>
         <!-- <bread-crumb></bread-crumb> -->
-        <logout></logout>
       </el-header>
       
         <bread-crumb class="breadcrumb"></bread-crumb>
@@ -85,13 +84,11 @@
 <script>
 import Logo from "components/content/Logo.vue";
 import BreadCrumb from 'components/content/BreadCrumb.vue';
-import Logout from 'components/content/Logout.vue';
 
 export default {
   components: {
     Logo,
-    BreadCrumb,
-    Logout
+    BreadCrumb
   },
   name: "Admin",
   data() {

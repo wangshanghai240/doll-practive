@@ -130,7 +130,24 @@ let routes = [{
             requireAuth:true
         },
         // 进入该路径需要验证，登录验证一般都是在全局路由使用导航守卫beforeEach()或者在路由列表中使用路由守卫beforeEnter
-    }
+    //     beforeEnter:(to,from,next) =>{
+    //         console.log(to.matched)
+    //         if(to.matched.some((r)=>{r.meta.requireAuth})){
+    //             if(window.sessionStorage.getItem('token')){
+    //                 next()
+    //             }
+    //             else{
+    //                 next({
+    //                     name:'login',
+    //                     redirect:to.fullPath
+    //                 })
+    //             }
+    //         }
+    //         else{
+    //             next('/login')
+    //         }
+    //     }
+    // }
 
 ]
 
@@ -163,25 +180,21 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// router.beforeEach((to, from, next) => {
-//     if(to.matched.some((r)=>{r.meta.requireAuth})){
-//         if(window.sessionStorage.getItem()){
-//             next()
-//         }
-//         else{
-//             next({
-//                 path:'/login'
-//             })
-//         }
-//     }
-//     else{
-//         next()
-//     }
-// })
-router.beforeEach((to,from,next) =>{
-    if(to.path == '/login') return next()
-    if(!sessionStorage.getItem('token')) return next('/login')
-    next()
+router.beforeEach((to, from, next) => {
+    if(to.matched.some((r)=>{r.meta.requireAuth})){
+        if(window.sessionStorage.getItem('token')){
+            next()
+        }
+        else{
+            next({
+                name:'login',
+                redirect:to.fullPath
+            })
+        }
+    }
+    else{
+        next('/login')
+    }
 })
 // 导出路由对象，暴露接口
 export default router

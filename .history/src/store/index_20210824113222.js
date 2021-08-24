@@ -18,15 +18,14 @@ let store = new Vuex.Store({
         // 删除token
         delToken(state) {
             state.token = ''
-            sessionStorage.removeItem('token')
+            sessionStorage.removeItem('logintoken')
         }
     },
     actions: {
-        // 异步操作
         deltoken(content) {
-            setTimeout(() => {
-                content.commit('delToken')
-            }, 100);
+                setTimeout(() => {
+                    content.commit('deltoken')
+                }, 500);
         }
     }
 })

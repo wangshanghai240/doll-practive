@@ -23,6 +23,5 @@ ul,li,a,ol{
   margin:0;
   padding:0;
   text-decoration:none;
-  list-style: none;
 }
 </style>

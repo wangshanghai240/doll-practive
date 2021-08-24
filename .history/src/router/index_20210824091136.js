@@ -25,7 +25,6 @@ let routes = [{
     },
     {
         path: '/login',
-        name:'login',
         component: Login
     },
     {
@@ -34,9 +33,14 @@ let routes = [{
         children: [{
                 path: 'dashboard',
                 component: Dashboard,
-                meta:{
-                    requireAuth:true
-                }
+                // meta:{
+                //     breadcrumb:[
+                //         {
+                //             path:'/dahsboard',
+                //             name:'首页'
+                //         }
+                //     ]
+                // }
             },
             {
                 path: '',
@@ -125,11 +129,7 @@ let routes = [{
                     }]
                 }
             }
-        ],
-        meta:{
-            requireAuth:true
-        },
-        // 进入该路径需要验证，登录验证一般都是在全局路由使用导航守卫beforeEach()或者在路由列表中使用路由守卫beforeEnter
+        ]
     }
 
 ]
@@ -163,25 +163,19 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// router.beforeEach((to, from, next) => {
-//     if(to.matched.some((r)=>{r.meta.requireAuth})){
-//         if(window.sessionStorage.getItem()){
-//             next()
-//         }
-//         else{
-//             next({
-//                 path:'/login'
-//             })
-//         }
-//     }
-//     else{
-//         next()
-//     }
-// })
-router.beforeEach((to,from,next) =>{
-    if(to.path == '/login') return next()
-    if(!sessionStorage.getItem('token')) return next('/login')
-    next()
+router.beforeEach((to, from, next) => {
+    // 如果要跳转到登陆页面
+    if (to.path == '/login') {
+        // 则直接放行
+        next()
+        if(sessionStorage.getItem('token') !== ''){
+            next()
+        }
+        else{
+            this.$message.error('您还没有登录哦')
+            next('/login')
+        }
+    }
 })
 // 导出路由对象，暴露接口
 export default router

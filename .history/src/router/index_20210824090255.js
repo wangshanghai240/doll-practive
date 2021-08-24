@@ -25,7 +25,6 @@ let routes = [{
     },
     {
         path: '/login',
-        name:'login',
         component: Login
     },
     {
@@ -34,9 +33,14 @@ let routes = [{
         children: [{
                 path: 'dashboard',
                 component: Dashboard,
-                meta:{
-                    requireAuth:true
-                }
+                // meta:{
+                //     breadcrumb:[
+                //         {
+                //             path:'/dahsboard',
+                //             name:'首页'
+                //         }
+                //     ]
+                // }
             },
             {
                 path: '',
@@ -125,11 +129,7 @@ let routes = [{
                     }]
                 }
             }
-        ],
-        meta:{
-            requireAuth:true
-        },
-        // 进入该路径需要验证，登录验证一般都是在全局路由使用导航守卫beforeEach()或者在路由列表中使用路由守卫beforeEnter
+        ]
     }
 
 ]
@@ -163,25 +163,42 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// router.beforeEach((to, from, next) => {
-//     if(to.matched.some((r)=>{r.meta.requireAuth})){
-//         if(window.sessionStorage.getItem()){
-//             next()
-//         }
-//         else{
-//             next({
-//                 path:'/login'
-//             })
-//         }
-//     }
-//     else{
-//         next()
-//     }
-// })
-router.beforeEach((to,from,next) =>{
-    if(to.path == '/login') return next()
-    if(!sessionStorage.getItem('token')) return next('/login')
-    next()
+router.beforeEach((to, from, next) => {
+<<<<<<< HEAD
+    // 如何要跳转到登陆页面
+=======
+    // 如果要跳转到登陆页面
+>>>>>>> f336db43572d57b468d242cd5634e7de41a5e10e
+    if (to.path == '/login') {
+        // 则直接放行
+        next()
+    } else {
+        // 如果要进入其他页面，则需要验证是否有token，有说明登陆了
+<<<<<<< HEAD
+        if (to.path == '/admin') {
+            if (window.sessionStorage.getItem('token')) {
+                next()
+                // 没有token
+            } else {
+                // 则重定向到登陆页面
+                next('/login')
+            }
+        }
+        else{
+            next()
+        }
+
+=======
+        if (sessionStorage.getItem('token') !== '') {
+            next()
+            // 没有token
+        } else {
+            // 则重定向到登陆页面
+            this.$message.error('请先登录')
+            next('/login')
+        }
+>>>>>>> f336db43572d57b468d242cd5634e7de41a5e10e
+    }
 })
 // 导出路由对象，暴露接口
 export default router

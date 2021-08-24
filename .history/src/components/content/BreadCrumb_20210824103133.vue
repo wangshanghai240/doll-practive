@@ -15,7 +15,6 @@
 <script>
 export default {
   name: "BreadCrumb",
-  // 监听路由变化
   watch:{
     $route:{
       handler(){
@@ -24,7 +23,6 @@ export default {
       immediate:true
     }
   },
-  // 页面挂载之后就执行该方法
   mounted(){
     this.getList()
   },
@@ -35,12 +33,12 @@ export default {
   // },
   data(){
       return{
+        //   breadcrumb:['首页','面料','订货会','商品列表','用户列表','日志列表']
         navlist:[]
       }
   },
   methods:{
     getList(){
-      // 将处于活跃的路由(地址)保存在navlist
       this.navlist = this.$route.matched.filter(item => item.name)
     }
   }

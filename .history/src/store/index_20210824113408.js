@@ -22,11 +22,10 @@ let store = new Vuex.Store({
         }
     },
     actions: {
-        // 异步操作
         deltoken(content) {
             setTimeout(() => {
-                content.commit('delToken')
-            }, 100);
+                content.commit('deltoken')
+            }, 500);
         }
     }
 })

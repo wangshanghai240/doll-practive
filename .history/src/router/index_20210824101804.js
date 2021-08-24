@@ -163,25 +163,21 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// router.beforeEach((to, from, next) => {
-//     if(to.matched.some((r)=>{r.meta.requireAuth})){
-//         if(window.sessionStorage.getItem()){
-//             next()
-//         }
-//         else{
-//             next({
-//                 path:'/login'
-//             })
-//         }
-//     }
-//     else{
-//         next()
-//     }
-// })
-router.beforeEach((to,from,next) =>{
-    if(to.path == '/login') return next()
-    if(!sessionStorage.getItem('token')) return next('/login')
-    next()
+router.beforeEach((to, from, next) => {
+    if(to.matched.some((r)=>{r.meta.requireAuth})){
+        if(window.sessionStorage.getItem()){
+            next()
+        }
+        else{
+            next({
+                path:'/login',
+                redirect:to.fullPath
+            })
+        }
+    }
+    else{
+        next()
+    }
 })
 // 导出路由对象，暴露接口
 export default router
