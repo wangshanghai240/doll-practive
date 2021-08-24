@@ -22,14 +22,9 @@
           <el-menu
             class="el-menu-vertical-demo"
             active-text-color="#C00FFCC"
-<<<<<<< HEAD
-            :router="true"
-            unique-opened
-=======
             default-active="/admin/dashboard"
             :router="true"
             :unique-opened='true'
->>>>>>> f336db43572d57b468d242cd5634e7de41a5e10e
             :collapse="iscollapse"
             :collapse-transition="false"
           >
@@ -45,19 +40,11 @@
                 <span>面料</span>
               </template>
               <el-menu-item-group>
-<<<<<<< HEAD
-                <el-menu-item index="/admin/fabric">
-                  <img src="~assets/image/navmenu/xuqiuqingdan.svg" alt="" />
-                  <span>需求清单</span>
-                </el-menu-item>
-                <el-menu-item index="/admin/fabric">
-=======
                 <el-menu-item index="/admin/fabric/reqlist">
                   <img src="~assets/image/navmenu/xuqiuqingdan.svg" alt="" />
                   <span>需求清单</span>
                 </el-menu-item>
                 <el-menu-item index="/admin/fabric/shoplist">
->>>>>>> f336db43572d57b468d242cd5634e7de41a5e10e
                   <img src="~assets/image/navmenu/caigouliebiao.svg" alt="" />
                   <span>采购列表</span>
                 </el-menu-item>
