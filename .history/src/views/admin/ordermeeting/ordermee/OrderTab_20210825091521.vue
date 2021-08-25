@@ -3,8 +3,9 @@
     <el-table
       :data="tableDatas"
       style="width: 100%"
+      :row-class-name="tableRowClassName"
       :stripe="true"
-      height=520px
+      height=600px
     >
     <!-- 表头信息 -->
       <el-table-column prop="id" label="序号" width="180"> </el-table-column>

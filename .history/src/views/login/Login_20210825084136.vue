@@ -34,7 +34,7 @@
       </el-form-item>
 
       <el-form-item class="logins">
-        <el-button type="primary" @click="loginhome" :class="{ bgc: isactive }"
+        <el-button type="primary" @click="loginhome" @keydown="login" :class="{ bgc: isactive }"
           >登录</el-button
         >
       </el-form-item>
@@ -100,6 +100,9 @@ export default {
         this.$message.error("亲~ ~用户名或密码不能为空哦");
       }
       this.isactive = !this.isactive;
+    },
+    login(){
+      this.loginhome()
     }
   },
 };

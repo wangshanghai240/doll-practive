@@ -8,7 +8,7 @@
     >
     </el-input>
     <div class="btn">
-      <el-button type="primary">搜索</el-button>
+      <el-button type="primary" @click="showinfo">搜索</el-button>
       <el-button type="warning">重置</el-button>
     </div>
   </div>

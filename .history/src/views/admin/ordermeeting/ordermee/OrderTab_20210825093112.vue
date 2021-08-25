@@ -3,6 +3,7 @@
     <el-table
       :data="tableDatas"
       style="width: 100%"
+      :row-class-name="tableRowClassName"
       :stripe="true"
       height=520px
     >

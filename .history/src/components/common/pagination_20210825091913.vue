@@ -3,9 +3,10 @@
     <el-pagination 
     background 
     layout="prev, pager, next" 
-    :total="orderlist.totalNumber"
+    :total="total"
     :page-sizes="pagesizes"
     :page-size="size"
+    :page-count="orderlist.totalNumber"
     >
     </el-pagination>
   </div>
@@ -24,7 +25,7 @@ export default {
     },
     data(){
         return {
-            total:0,
+            total:'',
             pagesizes:[10,20,30]
         }
     },

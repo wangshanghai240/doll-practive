@@ -7,7 +7,7 @@ import store from './store'
 // 事件总线
 Vue.prototype.$bus = new Vue()
 // 导入elementui
-import './plugins/elementui'
+import  './plugins/elementui.js'
 
 Vue.config.productionTip = false
 

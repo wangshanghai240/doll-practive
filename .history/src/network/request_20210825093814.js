@@ -5,7 +5,7 @@ import Vue from 'vue'
 export function request(config) {
     let instance = axios.create({
         baseURL: 'http://192.168.100.72:8769/outsource',
-        timeout: 1000*6
+        timeout: 5000
     })
     // 拦截请求
     instance.interceptors.request.use(config => {
@@ -21,12 +21,12 @@ export function request(config) {
     instance.interceptors.response.use(config => {
         switch(config.data.code){
             case 401:
-                this.Message.error(config.data.message)
-                this.$router.push('/login')
+                Vue.prototype.$message.error(config.data.message)
+                Vue.prototype.$router.push('/login')
                 break
             case 404:
                 if(config.data.message !== null){
-                    this.Message.error(config.data.message)
+                    Vue.prototype.$message.error(config.data.message)
                 }
                 else{
                     Vue.prototype.$message.error('页面未找到')
