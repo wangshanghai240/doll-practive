@@ -30,7 +30,7 @@ export function request(config) {
         }
         return config
     },err =>{
-        switch(err.data.status){
+        switch(err.data.statu){
             // 401未登录
             case 401:
                 // this.$message.error(config.data.message)

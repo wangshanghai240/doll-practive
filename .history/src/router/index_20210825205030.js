@@ -31,7 +31,6 @@ let routes = [{
     {
         path: '/admin',
         component: Admin,
-        name:'首页',
         children: [{
                 path: 'dashboard',
                 component: Dashboard

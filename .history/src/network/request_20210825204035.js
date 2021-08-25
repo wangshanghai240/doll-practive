@@ -8,10 +8,7 @@ export function request(config) {
     let instance = axios.create({
         // baseURL: 'http://192.168.100.72:8769/outsource',
         baseURL:'/api',
-        timeout: 1000*6,
-        headers:{
-            'content-type':'application/x-www-form-urlencoded'
-        }
+        timeout: 1000*6
     })
     // 拦截请求
     instance.interceptors.request.use(config => {
@@ -30,7 +27,7 @@ export function request(config) {
         }
         return config
     },err =>{
-        switch(err.data.status){
+        switch(err.data.statu){
             // 401未登录
             case 401:
                 // this.$message.error(config.data.message)

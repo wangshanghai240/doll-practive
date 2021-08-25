@@ -2,10 +2,9 @@
   <div class="ordersearch">
     <el-input
       class='ordsea'
-      placeholder="请输入活动名称"
+      placeholder="请输入搜索内容"
       prefix-icon="el-icon-search"
       v-model='search'
-      clearable
     >
     </el-input>
     <div class="btn">
@@ -41,7 +40,7 @@ export default {
  }
  .ordersearch .ordsea{
    display: inline-block;
-   width:200px;
+   width:150px;
    margin:0 20px 20px 10px;
  }
  .ordersearch .btn{
