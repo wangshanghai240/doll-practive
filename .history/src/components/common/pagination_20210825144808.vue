@@ -23,7 +23,7 @@ export default {
     },
     data(){
         return {
-            total:12,
+            total:0,
             pagesizes:[10,20,30]
         }
     },

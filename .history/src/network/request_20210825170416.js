@@ -6,14 +6,13 @@ import Vue from 'vue'
 // 封装axios
 export function request(config) {
     let instance = axios.create({
-        // baseURL: 'http://192.168.100.72:8769/outsource',
-        baseURL:'/api',
+        baseURL: 'http://192.168.100.72:8769/outsource',
+        // baseURL:'/api',
         timeout: 1000*6
     })
     // 拦截请求
     instance.interceptors.request.use(config => {
         // 发送请求前将token加入header中
-        config.headers['Access-Control-Allow-Origin'] = '*'
         config.headers.Authorization = sessionStorage.getItem('token')
         // 返回config，否则后端无法接收到请求
         return config

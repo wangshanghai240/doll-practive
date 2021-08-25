@@ -15,18 +15,16 @@ module.exports = {
             .set('assets',resolve('src/assets'))
     },
     devServer:{
-        // 配置代理
+        // 配置跨域
         proxy:{
             '/api':{
             // 目标地址即后端接口
             target:'http://192.168.100.72:8769/outsource',
             // 允许跨域
-            changeOrigin:true,
-            // 重写路径
-            // pathRewrite:{
-            //     // 用/api代替target
-            //     '^/api':''
-            // }
+            changOrigin:true,
+            pathRewrite:{
+                '^/api':''
+            }
         }
         }
         

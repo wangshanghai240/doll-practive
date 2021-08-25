@@ -14,13 +14,12 @@ export function deletordermeeting(){
     })
 }
 // 查询订单
-export function getordermeeting(page, limit){
+export function getordermeeting(name){
     return request({
-        url:'/orderMeeting',
+        url:'/orderMeeting/1/20',
         method:'post',
         data:{
-            page,
-            limit
+            name
         }
     })
 }

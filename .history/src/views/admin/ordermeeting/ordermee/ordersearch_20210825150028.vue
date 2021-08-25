@@ -8,7 +8,7 @@
     >
     </el-input>
     <div class="btn">
-      <el-button type="primary" @click="searchinfo">搜索</el-button>
+      <el-button type="primary" @click="searchinfo" v-model="search">搜索</el-button>
       <el-button type="warning">重置</el-button>
     </div>
   </div>
@@ -24,9 +24,8 @@ export default {
       }
     },
     methods:{
-      searchinfo(){
-        // 发送网路请求获取数据
-        getordermeeting(this.search).then(res =>{
+      showinfo(){
+        getordermeeting().then(res =>{
           console.log(res)
         })
       }

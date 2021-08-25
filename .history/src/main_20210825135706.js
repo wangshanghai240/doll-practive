@@ -6,9 +6,8 @@ import router from './router'
 import store from './store'
 // 事件总线
 Vue.prototype.$bus = new Vue()
-// 导入elementui及其样式
+// 导入elementui
 import elementui from './plugin/element'
-import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false
 Vue.use(elementui)

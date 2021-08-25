@@ -25,8 +25,7 @@ export default {
     },
     methods:{
       searchinfo(){
-        // 发送网路请求获取数据
-        getordermeeting(this.search).then(res =>{
+        getordermeeting().then(res =>{
           console.log(res)
         })
       }

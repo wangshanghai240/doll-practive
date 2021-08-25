@@ -6,15 +6,13 @@ import Vue from 'vue'
 // 封装axios
 export function request(config) {
     let instance = axios.create({
-        // baseURL: 'http://192.168.100.72:8769/outsource',
-        baseURL:'/api',
+        baseURL: 'http://192.168.100.72:8769/outsource',
         timeout: 1000*6
     })
     // 拦截请求
     instance.interceptors.request.use(config => {
         // 发送请求前将token加入header中
-        config.headers['Access-Control-Allow-Origin'] = '*'
-        config.headers.Authorization = sessionStorage.getItem('token')
+        config.headers['Authorization'] = sessionStorage.getItem('token')
         // 返回config，否则后端无法接收到请求
         return config
     }, err => {
@@ -28,7 +26,7 @@ export function request(config) {
         }
         return config
     },err =>{
-        switch(err.data.statu){
+        switch(err.data.status){
             // 401未登录
             case 401:
                 // this.$message.error(config.data.message)
@@ -45,9 +43,6 @@ export function request(config) {
                     this.$router.replace('/login')
                 },1000)
                 break
-                case 404:
-                    Vue.prototype.$message.error('Sorry Not Find')
-                    break
                 default:
                     Vue.prototype.$message.error('其他错误')
         }

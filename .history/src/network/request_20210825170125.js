@@ -13,7 +13,6 @@ export function request(config) {
     // 拦截请求
     instance.interceptors.request.use(config => {
         // 发送请求前将token加入header中
-        config.headers['Access-Control-Allow-Origin'] = '*'
         config.headers.Authorization = sessionStorage.getItem('token')
         // 返回config，否则后端无法接收到请求
         return config

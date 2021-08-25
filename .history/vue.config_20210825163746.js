@@ -23,10 +23,10 @@ module.exports = {
             // 允许跨域
             changeOrigin:true,
             // 重写路径
-            // pathRewrite:{
-            //     // 用/api代替target
-            //     '^/api':''
-            // }
+            pathRewrite:{
+                // 用/api代替target
+                '^/api':'/'
+            }
         }
         }
         

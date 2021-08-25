@@ -6,9 +6,12 @@ import Vue from 'vue'
 // 封装axios
 export function request(config) {
     let instance = axios.create({
-        // baseURL: 'http://192.168.100.72:8769/outsource',
-        baseURL:'/api',
-        timeout: 1000*6
+        baseURL: 'http://192.168.100.72:8769/outsource',
+        // baseURL:'/api',
+        timeout: 1000*6,
+        headers:{
+            'Access-Control-Allow-Origin':'http://192.168.100.72:8769/outsource'
+        }
     })
     // 拦截请求
     instance.interceptors.request.use(config => {

@@ -5,6 +5,7 @@
     layout="prev, pager, next" 
     :total="orderlist.totalNumber"
     :page-sizes="pagesizes"
+    :current-page="currentPage"
     >
     </el-pagination>
   </div>
@@ -23,7 +24,7 @@ export default {
     },
     data(){
         return {
-            total:12,
+            total:0,
             pagesizes:[10,20,30]
         }
     },
