@@ -5,8 +5,8 @@
       <!-- <el-breadcrumb-item :to="{path:'/admin/dashboard'}">首页</el-breadcrumb-item> -->
       <el-breadcrumb-item 
       :to="{path:item.path}" 
-      v-for="(item,index) in breadcrumb" 
-      :key="index">{{ item.name }}
+      v-for="item in breadcrumb" 
+      :key="item.path">{{ item.name }}
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>

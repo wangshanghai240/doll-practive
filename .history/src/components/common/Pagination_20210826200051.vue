@@ -1,13 +1,13 @@
 <template>
   <div class="pagination">
-    <!-- <div class="total ccc">共 {{ orderlist.length }} 条</div>
+    <div class="total ccc">共 {{ orderlist.length }} 条</div>
     <div class="select ccc">
       <select name="" id="">
         <option value="10">10条/页</option>
         <option value="20">20条/页</option>
         <option value="30">30条/页</option>
       </select>
-    </div> -->
+    </div>
     <el-pagination
       background
       @size-change="sizechange"
@@ -17,11 +17,11 @@
       class="el-pa ccc"
     >
     </el-pagination>
-    <!-- <div class="forward ccc">
+    <div class="forward ccc">
       <span>前往</span>
       <el-input class="input"></el-input>
       <span>页</span>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -39,7 +39,8 @@ export default {
   },
   data() {
     return {
-      
+      pagesizes: [10, 20, 30],
+      currentpage: 10,
     };
   },
   methods: {
@@ -51,11 +52,11 @@ export default {
 </script>
 
 <style scoped>
-/* .pagination {
+.pagination {
   margin: 20px auto;
-  text-align: center; */
+  text-align: center;
   /* 弹性盒子 */
-  /* display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -80,14 +81,14 @@ export default {
   height: 20px;
   margin: 8px 3px;
   border-color: #707070;
-} */
+}
 /* 前往页 */
-/* .pagination .forward {
+.pagination .forward {
   width: 130px;
 }
-.pagination .forward span { */
+.pagination .forward span {
   /* display: block; */
-  /* font-size: 14px;
+  font-size: 14px;
   color: #8f8f8f;
 }
 .pagination .forward .input {
@@ -97,5 +98,5 @@ export default {
 }
 .pagination .forward .el-input__inner {
   height: 28px;
-} */
+}
 </style>

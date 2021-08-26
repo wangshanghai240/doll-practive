@@ -39,7 +39,8 @@ export default {
   },
   data() {
     return {
-      
+      pagesizes: [10, 20, 30],
+      currentpage: 10,
     };
   },
   methods: {

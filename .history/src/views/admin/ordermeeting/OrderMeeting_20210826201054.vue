@@ -8,11 +8,11 @@
 
 <script>
 import { getAllOrderMeeting } from 'network/ordermeeting/ordermeeting'
-import ordersearch from './ordermee/Ordersearch.vue'
+import ordersearch from 'views/admin/ordermeeting/ordermee/Ordersearch.vue'
 import OrderTab from './ordermee/OrderTab.vue'
 import Pagination from 'components/common/Pagination.vue'
 export default {
-  components: { ordersearch, OrderTab, Pagination },
+  components: { ordersearch,OrderTab, Pagination },
     name:'OrderMeeting',
     data(){
         return{

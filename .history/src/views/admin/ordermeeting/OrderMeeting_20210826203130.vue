@@ -20,7 +20,7 @@ export default {
         }
     },
     // 组件创建就获取订货数据
-    created(){
+    mounted(){
         this.ordermeeting()
     },
     methods:{

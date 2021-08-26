@@ -53,7 +53,6 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form> -->
-    <h2>jdjajsdfjasdf</h2>
   </div>
 </template>
 
@@ -62,7 +61,16 @@ export default {
   name: "Dashboard",
   data() {
       return {
-        
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
       }
     },
     methods: {

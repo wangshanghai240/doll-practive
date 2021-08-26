@@ -8,7 +8,7 @@
 
 <script>
 import { getAllOrderMeeting } from 'network/ordermeeting/ordermeeting'
-import ordersearch from './ordermee/Ordersearch.vue'
+import ordersearch from 'views/admin/ordermeeting/ordermee/Ordersearch.vue'
 import OrderTab from './ordermee/OrderTab.vue'
 import Pagination from 'components/common/Pagination.vue'
 export default {
