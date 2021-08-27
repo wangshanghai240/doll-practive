@@ -10,13 +10,13 @@
     </el-input>
     <div class="btn">
       <el-button type="primary" @click="searchinfo">搜索</el-button>
-      <el-button type="warning">重置</el-button>
+      <el-button type="warning" @click="orderlist">重置</el-button>
     </div>
   </div>
 </template>
 
 <script>
-// import { getAllOrderMeeting } from "network/ordermeeting/ordermeeting";
+import { getAllOrderMeeting } from "network/ordermeeting/ordermeeting";
 
 export default {
   name: "Ordersearch",
@@ -24,7 +24,7 @@ export default {
     ordersearch: {
       type: Array,
       default() {
-        return [];
+       []
       },
     },
   },
@@ -32,7 +32,7 @@ export default {
     return {
       search: "",
       // 存储符合search的订货信息
-      table: [],
+      table: {},
       // 存储有name属性的订货信息
       cc: [],
     };
@@ -40,27 +40,35 @@ export default {
   methods: {
     // 查询事件监听处理
     searchinfo() {
-      this.cc = this.ordersearch
-      console.log(this.cc.length)
+      this.cc = this.ordersearch.filter((item) => {
+        item.name;
+      });
+      this.cc.length = length;
       // 遍历出符合search的订货信息
-      for (let i = 0; i < this.cc.length; i++) {
-        if (this.cc[i].name == this.search) {
-          this.table = this.cc[i];
+      for (let i = 0; i < length; i++) {
+        if (this.cc[i].name === this.search) {
+          this.tbale = this.cc[i];
+        } else {
+          this.$messge({
+            type: "warning",
+            message: "您查询的活动不存在",
+          });
         }
       }
+      // 将表格信息清空
+      this.$refs.ordertab.tableDatas = [];
       console.log(this.table);
-      this.$emit('searchdata',this.table)
     },
     // 重置
-    // orderlist() {
-    //   // 清空查询信息
-    //   this.search = "";
-    //   // 网路请求
-    //   getAllOrderMeeting().then((res) => {
-    //     // 将请求到的订货信息填充表格
-    //     this.$refs.ordertab.tableDatas = res.data.data;
-    //   });
-    // },
+    orderlist() {
+      // 清空查询信息
+      this.search = "";
+      // 网路请求
+      getAllOrderMeeting().then((res) => {
+        // 将请求到的订货信息填充表格
+        this.$refs.ordertab.tableDatas = res.data.data;
+      });
+    },
   },
 };
 </script>

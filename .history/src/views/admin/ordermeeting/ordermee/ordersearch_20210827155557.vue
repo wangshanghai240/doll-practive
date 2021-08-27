@@ -32,7 +32,7 @@ export default {
     return {
       search: "",
       // 存储符合search的订货信息
-      table: [],
+      table: {},
       // 存储有name属性的订货信息
       cc: [],
     };

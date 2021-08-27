@@ -32,7 +32,7 @@ export default {
     return {
       search: "",
       // 存储符合search的订货信息
-      table: [],
+      table: {},
       // 存储有name属性的订货信息
       cc: [],
     };
@@ -41,15 +41,18 @@ export default {
     // 查询事件监听处理
     searchinfo() {
       this.cc = this.ordersearch
-      console.log(this.cc.length)
       // 遍历出符合search的订货信息
-      for (let i = 0; i < this.cc.length; i++) {
-        if (this.cc[i].name == this.search) {
-          this.table = this.cc[i];
+      for (let i = 0; i < length; i++) {
+        if (this.cc[i].name === this.search) {
+          this.tbale = this.cc[i];
+        } else {
+          this.$messge({
+            type: "warning",
+            message: "您查询的活动不存在",
+          });
         }
       }
       console.log(this.table);
-      this.$emit('searchdata',this.table)
     },
     // 重置
     // orderlist() {

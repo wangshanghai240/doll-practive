@@ -50,9 +50,7 @@ export function request(config) {
                 //     })
                     
                 }).then(() =>{
-                    // token过期要删除vuex中的token
                     Store.dispatch('deltoken')
-                    // 然后跳转到登录页面
                     window.location.href='/login'
                 })
                 

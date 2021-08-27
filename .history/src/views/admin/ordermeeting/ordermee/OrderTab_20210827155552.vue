@@ -5,7 +5,6 @@
       style="width: 100%"
       :stripe="true"
       height="520px"
-      @
     >
       <!-- 表头信息 -->
       <el-table-column prop="id" label="序号" width="180"> </el-table-column>
@@ -43,9 +42,9 @@ export default {
   name: "OrderTab",
   props: {
     tableDatas: {
-      type: Object,
+      type: Array,
       default() {
-        return {};
+        [];
       },
     },
   },
@@ -56,13 +55,15 @@ export default {
     };
   },
   // 页面一创建调用该方法获取数据
-  mounted() {
+  updated() {
     this.getsearch();
   },
   methods: {
     getsearch() {
-        console.log(this.table)
-        this.tableDatas = this.table
+        this.tableDatas = this.table;
+    },
+    searchdata(){
+        this.table = this.$refs.ordsea.table
     }
   },
 };

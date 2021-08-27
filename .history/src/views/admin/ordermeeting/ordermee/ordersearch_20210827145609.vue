@@ -32,7 +32,7 @@ export default {
     return {
       search: "",
       // 存储符合search的订货信息
-      table: [],
+      table: {},
       // 存储有name属性的订货信息
       cc: [],
     };
@@ -44,12 +44,11 @@ export default {
       console.log(this.cc.length)
       // 遍历出符合search的订货信息
       for (let i = 0; i < this.cc.length; i++) {
-        if (this.cc[i].name == this.search) {
-          this.table = this.cc[i];
-        }
+        if (this.cc[i].indexOf(this.search) !== -1) {
+          this.tbale = this.cc[i];
+        } 
       }
       console.log(this.table);
-      this.$emit('searchdata',this.table)
     },
     // 重置
     // orderlist() {

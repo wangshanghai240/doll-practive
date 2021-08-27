@@ -1,7 +1,7 @@
 <template>
   <div class="ordmet">
-    <order-search :ordersearch="orderlist" ref="ordsea"></order-search>
-    <order-tab :tableDatas="orderlist" @searchdata='searchdata' ref="ordertab"></order-tab>
+    <order-search :ordersearch="orderlist"></order-search>
+    <order-tab :tableDatas="orderlist"></order-tab>
     <!-- <pagination :orderlist="orderlist"></pagination> -->
   </div>
 </template>
@@ -39,9 +39,6 @@ export default {
           })
       });
     },
-    searchdata(table){
-        this.refs.ordertab.table = table
-    }
   },
 };
 </script>

@@ -1,0 +1,79 @@
+<template>
+  <div class="ordersearch">
+    <el-input
+      class="ordsea"
+      placeholder="请输入活动名称"
+      prefix-icon="el-icon-search"
+      v-model="search"
+      clearable
+    >
+    </el-input>
+    <div class="btn">
+      <el-button type="primary" @click="searchinfo">搜索</el-button>
+      <el-button type="warning" @click="orderlist">重置</el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { getAllOrderMeeting } from "network/ordermeeting/ordermeeting";
+
+export default {
+  name: "Ordersearch",
+  props: {
+    ordersearch: {
+      type: Array,
+      default() {
+       []
+      },
+    },
+  },
+  data() {
+    return {
+      search: "",
+      table: {},
+      cc: [],
+    };
+  },
+  methods: {
+    searchinfo() {
+      this.cc = this.ordersearch.filter((item) => {
+        item.name;
+      });
+      this.cc.length = length;
+      for (let i = 0; i < length; i++) {
+        if (this.cc[i].name === this.search) {
+          this.tbale = this.cc[i];
+        } else {
+          this.$messge({
+            type: "warning",
+            message: "您查询的活动不存在",
+          });
+        }
+      }
+      this.$refs.ordertab.tableDatas = [];
+      console.log(this.table);
+    },
+    orderlist() {
+      this.search = "";
+      getAllOrderMeeting().then((res) => {
+        this.$refs.ordertab.tableDatas = res.data.data;
+      });
+    },
+  },
+};
+</script>
+
+<style scoped>
+.ordersearch {
+  width: 100%;
+}
+.ordersearch .ordsea {
+  display: inline-block;
+  width: 200px;
+  margin: 0 20px 20px 10px;
+}
+.ordersearch .btn {
+  display: inline-block;
+}
+</style>

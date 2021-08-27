@@ -11,7 +11,7 @@
     <el-pagination
       background
       @size-change="sizechange"
-      @current-change="currtchange"
+      @current-change="currchange"
       layout="total, size, prev, pager, next, jumper"
       :total="orderlist.length"
       class="el-pa ccc"
@@ -34,7 +34,7 @@ export default {
     orderlist: {
       type: Array,
       default() {
-        []
+        [];
       },
     },
   },
@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     // 发送网络请求，保存数据
-    sizechange(){},
-    currtchange(){}
+    sizechange() {},
+    currchange() {},
   },
 };
 </script>

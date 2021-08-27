@@ -5,7 +5,6 @@
       style="width: 100%"
       :stripe="true"
       height="520px"
-      @
     >
       <!-- 表头信息 -->
       <el-table-column prop="id" label="序号" width="180"> </el-table-column>
@@ -62,6 +61,7 @@ export default {
   methods: {
     getsearch() {
         console.log(this.table)
+        this.tableDatas = {}
         this.tableDatas = this.table
     }
   },

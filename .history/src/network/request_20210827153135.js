@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Store from 'store'
+import Store from 'vuex'
 import { MessageBox } from 'element-ui'
 // 封装axios
 export function request(config) {
@@ -50,10 +50,8 @@ export function request(config) {
                 //     })
                     
                 }).then(() =>{
-                    // token过期要删除vuex中的token
-                    Store.dispatch('deltoken')
-                    // 然后跳转到登录页面
-                    window.location.href='/login'
+                    Store.dispatch('deltoken').then(()=>{location.reload()})
+                    this.$router.replace('/login')
                 })
                 
                 break

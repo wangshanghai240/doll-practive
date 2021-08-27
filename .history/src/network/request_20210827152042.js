@@ -1,6 +1,8 @@
 import axios from 'axios'
-import Store from 'store'
-import { MessageBox } from 'element-ui'
+import Store from 'vuex'
+import {
+    // MessageBox
+} from 'element-ui'
 // 封装axios
 export function request(config) {
     let instance = axios.create({
@@ -26,21 +28,21 @@ export function request(config) {
             // 401后端表示登录信息过期
             case 401:
                 // confirm返回的是一个promise，便于后续处理
-                MessageBox.confirm('用户信息已过期，请重新登录', '提示', {
+                this.$confirm('用户信息已过期，请重新登录', '提示', {
                     // 点击confirmButtonText,执行成功的回调
                     confirmButtonText: '确定',
                     // 点击cancelButtonText,执行失败的回调
                     cancelButtonText: '取消',
                     type: 'warning'
-                // }).then(() => {
-                //     this.$message({
-                //         // 信息提示类型
-                //         type: 'success',
-                //         // 信息内容
-                //         message: '推出登录成功',
-                //         // 是否居中
-                //         center: true
-                //     })
+                }).then(() => {
+                    this.$message({
+                        // 信息提示类型
+                        type: 'success',
+                        // 信息内容
+                        message: '推出登录成功',
+                        // 是否居中
+                        center: true
+                    })
                 // }).catch(() => {
                 //     // 失败的回调：提示信息
                 //     this.$message({
@@ -48,14 +50,9 @@ export function request(config) {
                 //         message: '已取消',
                 //         center: true
                 //     })
-                    
-                }).then(() =>{
-                    // token过期要删除vuex中的token
-                    Store.dispatch('deltoken')
-                    // 然后跳转到登录页面
-                    window.location.href='/login'
                 })
-                
+                Store.dispatch('deltoken')
+                this.$router.replace('/login')
                 break
             case 500:
                 

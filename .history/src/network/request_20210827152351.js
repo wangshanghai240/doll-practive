@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Store from 'store'
+import Store from 'vuex'
 import { MessageBox } from 'element-ui'
 // 封装axios
 export function request(config) {
@@ -22,6 +22,7 @@ export function request(config) {
     })
     // 拦截响应
     instance.interceptors.response.use(response => {
+        let that = this
         switch (response.data.code) {
             // 401后端表示登录信息过期
             case 401:
@@ -48,14 +49,9 @@ export function request(config) {
                 //         message: '已取消',
                 //         center: true
                 //     })
-                    
-                }).then(() =>{
-                    // token过期要删除vuex中的token
-                    Store.dispatch('deltoken')
-                    // 然后跳转到登录页面
-                    window.location.href='/login'
                 })
-                
+                Store.dispatch('deltoken')
+                that.$router.replace('/login')
                 break
             case 500:
                 

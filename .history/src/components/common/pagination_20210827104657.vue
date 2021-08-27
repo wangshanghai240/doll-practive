@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     // 发送网络请求，保存数据
-    sizechange(){},
-    currtchange(){}
+    sizechange() {},
+    currtchange() {},
   },
 };
 </script>

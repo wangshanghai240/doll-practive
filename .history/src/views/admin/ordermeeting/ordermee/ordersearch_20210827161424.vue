@@ -45,7 +45,7 @@ export default {
       // 遍历出符合search的订货信息
       for (let i = 0; i < this.cc.length; i++) {
         if (this.cc[i].name == this.search) {
-          this.table = this.cc[i];
+          this.table = [this.cc[i]];
         }
       }
       console.log(this.table);
