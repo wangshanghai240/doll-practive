@@ -1,0 +1,104 @@
+<template>
+  <div class="pagination">
+    <!-- <div class="total ccc">共 {{ orderlist.length }} 条</div>
+    <div class="select ccc">
+      <select name="" id="">
+        <option value="10">10条/页</option>
+        <option value="20">20条/页</option>
+        <option value="30">30条/页</option>
+      </select>
+    </div> -->
+    <el-pagination
+      @size-change="sizechange"
+      @current-change="currtchange"
+      layout="total, sizes, prev, pager, next, jumper"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
+      :total="orderlist.length"
+      class="el-pa ccc"
+      :background="true"
+    >
+    </el-pagination>
+    <!-- <div class="forward ccc">
+      <span>前往</span>
+      <el-input class="input"></el-input>
+      <span>页</span>
+    </div> -->
+  </div>
+</template>
+
+<script>
+// import { getordermeeting } from 'network/ordermeeting/ordermeeting'
+export default {
+  name: "Pagination",
+  // 接收来自父组件的值
+  props: {
+    orderlist: {
+      type: Array,
+      default() {
+        []
+      },
+    },
+  },
+  data() {
+    return {
+      
+    };
+  },
+  methods: {
+    // 发送网络请求，保存数据
+    sizechange(){},
+    currtchange(){}
+  },
+};
+</script>
+
+<style scoped>
+/* .pagination {
+  margin: 20px auto;
+  text-align: center; */
+  /* 弹性盒子 */
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination .ccc {
+  display: inline-block;
+}
+.pagination .total {
+  margin-right: 10px;
+  color: #a5a5a5;
+  font-size: 14px;
+}
+.pagination .select {
+  margin: 0 6px;
+  border-color: #a5a5a5;
+}
+.pagination .select option {
+  padding: 4px;
+}
+.pagination .select select {
+  outline: none;
+  width: 70px;
+  height: 20px;
+  margin: 8px 3px;
+  border-color: #707070;
+} */
+/* 前往页 */
+/* .pagination .forward {
+  width: 130px;
+}
+.pagination .forward span { */
+  /* display: block; */
+  /* font-size: 14px;
+  color: #8f8f8f;
+}
+.pagination .forward .input {
+  display: inline-block;
+  width: 50px;
+  margin: 0 8px;
+}
+.pagination .forward .el-input__inner {
+  height: 28px;
+} */
+</style>
