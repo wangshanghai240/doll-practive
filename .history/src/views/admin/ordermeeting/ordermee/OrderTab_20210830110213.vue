@@ -36,12 +36,15 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- dialog对话框 -->
-    <el-dialog title="数据更改" :visible.sync="dialogFormVisible">
-      <el-form>
-        <el-form-item label="活动名称" label-width="120">
-          <el-input class="name" autocomplete="off" v-model="row.name"></el-input>
+    <el-dialog>
+      <el-form
+        :model="editForm"
+        :rules="editFormRules"
+        ref="editFormRef"
+        label-width="70px"
+      >
+        <el-form-item label="活动名称">
+          <el-input required></el-input>
         </el-form-item>
         <el-form-item label="起止时间">
           <el-date-picker
@@ -53,12 +56,10 @@
           </el-date-picker>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updatelist"
-          >确 定</el-button
-        >
-      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editUserInfo">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -79,8 +80,7 @@ export default {
     return {
       tableData: [],
       search: "",
-      dialogFormVisible: false,
-      row: {},
+      iscenterDialogVisible: false,
     };
   },
   // 页面一创建调用该方法获取数据
@@ -93,10 +93,8 @@ export default {
   methods: {
     handleEdit(row) {
       console.log(row);
-      this.dialogFormVisible = !this.dialogFormVisible;
-      this.row = row;
+      this.iscenterDialogVisible = !this.iscenterDialogVisible
     },
-    updatelist(){}
   },
 };
 </script>

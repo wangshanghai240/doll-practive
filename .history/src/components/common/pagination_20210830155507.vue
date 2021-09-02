@@ -7,7 +7,7 @@
       :current-page="queryinfo.page"
       :page-sizes="pagesizes"
       :page-size="queryinfo.limit" 
-      :total="orderlist"
+      :total="orderlist.length"
       class="el-pa ccc"
       :background="true"
     >
@@ -22,8 +22,10 @@ export default {
   // 接收来自父组件的值
   props: {
     orderlist: {
-      type: Number,
-      default:0,
+      type: Array,
+      default() {
+        []
+      },
     },
   },
   data() {
@@ -41,38 +43,26 @@ export default {
         limit:10
       },
       pagesizes:[10,20,30,40],
-      // 存储每页条数数据
       records:[]
     };
   },
-  created(){
-    this.getpagelimit()
-  },
   methods: {
     // page-sizes改变时的事件处理程序
-    async sizechange(newlimit){
+    sizechange(newlimit){
       // 将回调的每页条数传递给limit
       this.queryinfo.limit = newlimit
       // 发送网路请求,获取分页数据
-      await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
+      getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
         console.log(res)
-        this.records = res.data.data.records
-        // 
-        this.$emit('records',this.records)
-      })
-      
-    },
-    // 当前页码发生改变时的事件处理程序
-    async currtchange(page){
-      // 将新页码传递给page
-      this.queryinfo.page = page
-      await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
         this.records = res.data.data.records
       })
       this.$emit('records',this.records)
     },
-    getpagelimit(){
-      this.$emit('getpagelimit',this.queryinfo)
+    // 当前页码发生改变时的事件处理程序
+    currtchange(page){
+      // 将新页码传递给page
+      this.queryinfo.page = page
+      getordermeeting(this.queryinfo,this.queryinfo.query).then()
     }
   },
 };

@@ -27,14 +27,14 @@
             :collapse="iscollapse"
             :collapse-transition="false"
           >
-          <!-- <el-menu-item >
+          <el-menu-item >
 
-          </el-menu-item> -->
+          </el-menu-item>
             <!-- ['首页',{'面料':['需求清单','采购列表']},'订货会','商品列表','用户列表','日志列表'] -->
             <!-- 首页 -->
             <el-menu-item index="/admin/dashboard">
               <img src="~assets/image/navmenu/home-ff.svg" alt="" />
-              <span>首页</span>
+              <span>首页(表单模板)</span>
             </el-menu-item>
             <!-- 面料菜单 -->
             <el-submenu index="/admin/dashboard">
@@ -89,7 +89,7 @@ import Logo from "components/content/Logo.vue";
 import BreadCrumb from "components/content/BreadCrumb.vue";
 import Logout from "components/content/Logout.vue";
 
-import { getuserinfo } from 'network/user/user'
+import { getuserinfo } from 'network/user'
 export default {
   components: {
     Logo,

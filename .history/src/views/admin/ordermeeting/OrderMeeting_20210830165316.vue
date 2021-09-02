@@ -8,7 +8,7 @@
     ></order-search>
     <order-tab :tableDatas="orderlist" ref="ordertab"></order-tab>
     <pagination
-      :orderlist="paginationlength"
+      :orderlist="orderlist"
       ref="pagination"
       @records="records"
       @getpagelimit='getpagelimit'
@@ -35,9 +35,7 @@ export default {
       orderlist: [],
       // 存储从ordersearch组件传过来的搜索值
       search: "",
-      queryinfo:{},
-      // 存储所有订货会数据的长度
-      paginationlength:0
+      queryinfo:{}
     };
   },
   // 组件挂载之后就获取订货数据
@@ -46,20 +44,19 @@ export default {
   },
   methods: {
     ordermeeting() {
-      // 发送网络请求获取所有订货list
-      getAllOrderMeeting()
-        .then((res) => {
-          console.log(res);
-          // 将数据长度保存在paginationlength
-          this.paginationlength = res.data.data.length;
-        })
-        .catch((err) => {
-          this.$message({
-            type: "danger",
-            message: err,
-          });
-        });
-        // 对订货列表查询
+      // 发送网络请求
+      // getAllOrderMeeting()
+      //   .then((res) => {
+      //     console.log(res);
+      //     // 将数据保存在orderlist
+      //     this.orderlist = res.data.data;
+      //   })
+      //   .catch((err) => {
+      //     this.$message({
+      //       type: "danger",
+      //       message: err,
+      //     });
+      //   });
       getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
         this.orderlist = res.data.data.records
       })

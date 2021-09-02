@@ -112,7 +112,7 @@ VueRouter.prototype.push = function push(location) {
 //         next()
 //     }
 // })
-// 登录验证
+// 登录验证(全局路由导航)
 router.beforeEach((to, from, next) => {
     // to:将要达到的路径
     // from:离开的路径

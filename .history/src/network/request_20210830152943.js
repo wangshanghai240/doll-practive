@@ -22,7 +22,10 @@ export function request(config) {
     })
     // 拦截响应
     instance.interceptors.response.use(response => {
-        switch (response.data.code) {
+        // 拦截之后需要return 响应
+        return response
+    }, err => {
+        switch (err.data.code) {
             // 401后端表示登录信息过期
             case 401:
                 // confirm返回的是一个promise，便于后续处理
@@ -41,13 +44,6 @@ export function request(config) {
             break
                 
         }
-        // 拦截之后需要return 响应
-        return response
-    }, err => {
-        this.$message({
-            type:'info',
-            message:err
-        })
     })
     // 发送正真的网络请求
     return instance(config)

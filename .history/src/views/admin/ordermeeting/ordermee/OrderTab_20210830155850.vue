@@ -95,8 +95,7 @@ export default {
       console.log(row);
       this.dialogFormVisible = !this.dialogFormVisible;
       this.row = row;
-    },
-    updatelist(){}
+    }
   },
 };
 </script>

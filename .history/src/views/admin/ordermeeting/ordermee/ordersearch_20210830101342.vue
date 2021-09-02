@@ -6,7 +6,7 @@
       prefix-icon="el-icon-search"
       v-model="search"
       clearable
-      @clear="getorderlist"
+      @blur="getorderlist"
     >
     </el-input>
     <div class="btn">
@@ -42,16 +42,13 @@ export default {
       if(this.search == ''){
         this.$message.error('请先输入活动名称')
       }
-      // search不为空
+      // 不为空
       else{
-        // 发射事件并将search传递出去
         this.$emit('searchdata',this.search)
       }
       
     },
-    // 重置按钮事件
     reset(){
-      // 点击重置获取所有订货list
       getAllOrderMeeting().then(res =>{
         this.resetlist = res.data.data
         this.search = ''

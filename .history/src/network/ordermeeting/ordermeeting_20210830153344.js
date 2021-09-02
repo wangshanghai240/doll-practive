@@ -19,9 +19,7 @@ export function getordermeeting(datas,body){
         // 参数拼接到url
         url:'/orderMeeting/' + datas.page + '/' + datas.limit,
         method:'post',
-        data:{
-            ...body
-        }
+        body
     })
 }
 // 新增订货

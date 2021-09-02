@@ -40,8 +40,8 @@
     <!-- dialog对话框 -->
     <el-dialog title="数据更改" :visible.sync="dialogFormVisible">
       <el-form>
-        <el-form-item label="活动名称" label-width="120">
-          <el-input class="name" autocomplete="off" v-model="row.name"></el-input>
+        <el-form-item label="活动名称" width='80'>
+          <el-input class="name" autocomplete="off" required></el-input>
         </el-form-item>
         <el-form-item label="起止时间">
           <el-date-picker
@@ -55,7 +55,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updatelist"
+        <el-button type="primary" @click="dialogFormVisible = false"
           >确 定</el-button
         >
       </div>
@@ -96,7 +96,6 @@ export default {
       this.dialogFormVisible = !this.dialogFormVisible;
       this.row = row;
     },
-    updatelist(){}
   },
 };
 </script>

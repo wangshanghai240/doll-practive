@@ -32,34 +32,24 @@
         </template> -->
         <template v-slot="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">修改</el-button>
+          <el-dialog
+            title="提示"
+            :visible.sync="centerDialogVisible"
+            width="30%"
+            center
+          >
+            <span>需要注意的是内容是默认不居中的</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="centerDialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="centerDialogVisible = false"
+                >确 定</el-button
+              >
+            </span>
+          </el-dialog>
           <el-button size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- dialog对话框 -->
-    <el-dialog title="数据更改" :visible.sync="dialogFormVisible">
-      <el-form>
-        <el-form-item label="活动名称" label-width="120">
-          <el-input class="name" autocomplete="off" v-model="row.name"></el-input>
-        </el-form-item>
-        <el-form-item label="起止时间">
-          <el-date-picker
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          >
-          </el-date-picker>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updatelist"
-          >确 定</el-button
-        >
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -79,8 +69,7 @@ export default {
     return {
       tableData: [],
       search: "",
-      dialogFormVisible: false,
-      row: {},
+      centerDialogVisible:false
     };
   },
   // 页面一创建调用该方法获取数据
@@ -92,11 +81,8 @@ export default {
   // },
   methods: {
     handleEdit(row) {
-      console.log(row);
-      this.dialogFormVisible = !this.dialogFormVisible;
-      this.row = row;
+      console.log(row)
     },
-    updatelist(){}
   },
 };
 </script>

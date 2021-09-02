@@ -20,7 +20,7 @@ export function getordermeeting(datas,body){
         url:'/orderMeeting/' + datas.page + '/' + datas.limit,
         method:'post',
         data:{
-            ...body
+            body
         }
     })
 }
