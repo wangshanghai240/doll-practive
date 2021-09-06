@@ -32,7 +32,7 @@
         </template> -->
         <template v-slot="scope">
           <el-button size="mini" @click.native="handleEdit(scope.row)">修改</el-button>
-          <el-button size="mini" type="danger" @click.native="deleteorder(scope.row)">删除</el-button>
+          <el-button size="mini" type="danger" @click="deleteorder(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -82,7 +82,6 @@ export default {
       dialogFormVisible: false,
       // 存储当前表格行的数据
       row: {},
-      tabrecords:[]
     };
   },
   // 页面一创建调用该方法获取数据
@@ -107,13 +106,11 @@ export default {
       })
         this.dialogFormVisible = !this.dialogFormVisible;
     },
-    // 删除订单按钮
-    async deleteorder(row){
-      // 发送删除请求
-      await deletordermeeting(row.id).then(res=>{
+    deleteorder(){
+      deletordermeeting(this.row.id).then(res=>{
+        console.log(res)
         this.$message.success(res.data.message)
       })
-      
     }
   },
 };

@@ -108,12 +108,13 @@ export default {
         this.dialogFormVisible = !this.dialogFormVisible;
     },
     // 删除订单按钮
-    async deleteorder(row){
+    deleteorder(row){
       // 发送删除请求
-      await deletordermeeting(row.id).then(res=>{
+      deletordermeeting(row.id).then(res=>{
         this.$message.success(res.data.message)
       })
-      
+      this.$emit('refresh')
+      this.tableDatas = this.tabrecords
     }
   },
 };

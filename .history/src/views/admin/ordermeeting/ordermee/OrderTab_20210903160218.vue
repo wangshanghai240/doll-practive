@@ -112,6 +112,8 @@ export default {
       // 发送删除请求
       await deletordermeeting(row.id).then(res=>{
         this.$message.success(res.data.message)
+        this.$emit('refresh')
+        this.tableDatas = this.tabrecords
       })
       
     }

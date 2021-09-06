@@ -7,10 +7,10 @@ export function getAllOrderMeeting(){
     })
 }
 // 删除订货
-export function deletordermeeting(row){
+export function deletordermeeting(){
     return request({
-        url:'/orderMeeting/' + row,
-        method:'delete'
+        url:'/orderMeeting',
+        method:'delet'
     })
 }
 // 查询订单

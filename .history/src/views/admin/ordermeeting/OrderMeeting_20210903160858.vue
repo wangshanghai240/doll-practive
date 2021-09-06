@@ -6,7 +6,7 @@
       @resetlist="resetlist"
       @getorderlist="ccc"
     ></order-search>
-    <order-tab :tableDatas="orderlist" ref="ordertab"></order-tab>
+    <order-tab :tableDatas="orderlist" ref="ordertab" @refresh='refresh'></order-tab>
     <pagination
       :orderlist="paginationlength"
       ref="pagination"
@@ -106,6 +106,12 @@ export default {
     },
     getpagelimit(queryinfo){
       this.queryinfo = queryinfo
+    },
+    refresh(){
+      this.$nextTick(()=>{
+        this.$refs.ordertab.tabrecords = this.$refs.pagination.records
+      })
+      
     }
   },
 };

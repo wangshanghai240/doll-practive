@@ -82,7 +82,6 @@ export default {
       dialogFormVisible: false,
       // 存储当前表格行的数据
       row: {},
-      tabrecords:[]
     };
   },
   // 页面一创建调用该方法获取数据
@@ -107,13 +106,12 @@ export default {
       })
         this.dialogFormVisible = !this.dialogFormVisible;
     },
-    // 删除订单按钮
-    async deleteorder(row){
-      // 发送删除请求
-      await deletordermeeting(row.id).then(res=>{
+    deleteorder(){
+      console.log('点击成功')
+      deletordermeeting(this.row.id).then(res=>{
+        console.log(res)
         this.$message.success(res.data.message)
       })
-      
     }
   },
 };

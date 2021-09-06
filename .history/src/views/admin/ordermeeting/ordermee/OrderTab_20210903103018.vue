@@ -32,7 +32,7 @@
         </template> -->
         <template v-slot="scope">
           <el-button size="mini" @click.native="handleEdit(scope.row)">修改</el-button>
-          <el-button size="mini" type="danger" @click.native="deleteorder(scope.row)">删除</el-button>
+          <el-button size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -40,19 +40,22 @@
     <!-- dialog对话框 -->
     <el-dialog title="数据更改" :visible.sync="dialogFormVisible">
       <el-form>
-        <el-form-item label="活动名称" label-width="120" :required="true">
+        <el-form-item label="活动名称" label-width="120">
           <el-input
             class="name"
             autocomplete="off"
             v-model="row.name"
           ></el-input>
         </el-form-item>
-        <el-form-item label="ID" label-width="120" :required="true">
-          <el-input
-            class="name"
-            autocomplete="off"
-            v-model="row.id"
-          ></el-input>
+        <el-form-item label="起止时间">
+          <el-date-picker
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            v-model="row.end"
+          >
+          </el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -64,7 +67,7 @@
 </template>
 
 <script>
-import { updateOrder, deletordermeeting } from "network/ordermeeting/ordermeeting";
+import { updateOrder } from "network/ordermeeting/ordermeeting";
 export default {
   name: "OrderTab",
   props: {
@@ -82,7 +85,6 @@ export default {
       dialogFormVisible: false,
       // 存储当前表格行的数据
       row: {},
-      tabrecords:[]
     };
   },
   // 页面一创建调用该方法获取数据
@@ -99,22 +101,13 @@ export default {
       this.dialogFormVisible = !this.dialogFormVisible;
       this.row = row;
     },
-    // 修改对话框确定按钮
-     updatelist() {
-      //  发送请求
-       updateOrder(this.row).then((res)=>{
-        this.$message.success(res.data.message)
+    // 对话框确定按钮
+    async updatelist() {
+      await updateOrder(this.row).then((res)=>{
+        this.$message.success(res.message)
       })
         this.dialogFormVisible = !this.dialogFormVisible;
     },
-    // 删除订单按钮
-    async deleteorder(row){
-      // 发送删除请求
-      await deletordermeeting(row.id).then(res=>{
-        this.$message.success(res.data.message)
-      })
-      
-    }
   },
 };
 </script>

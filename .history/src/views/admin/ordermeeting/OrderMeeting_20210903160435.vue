@@ -6,7 +6,7 @@
       @resetlist="resetlist"
       @getorderlist="ccc"
     ></order-search>
-    <order-tab :tableDatas="orderlist" ref="ordertab"></order-tab>
+    <order-tab :tableDatas="orderlist" ref="ordertab" @refresh='refresh'></order-tab>
     <pagination
       :orderlist="paginationlength"
       ref="pagination"
@@ -62,8 +62,6 @@ export default {
         // 对订货列表查询
       getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
         this.orderlist = res.data.data.records
-      },err=>{
-        this.$message.warning(err.data.message)
       })
     },
     searchdata(search) {
@@ -106,6 +104,9 @@ export default {
     },
     getpagelimit(queryinfo){
       this.queryinfo = queryinfo
+    },
+    refresh(){
+      // this.$refs.ordertab.tabrecords = this.$refs.pagination.records
     }
   },
 };

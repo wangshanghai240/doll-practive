@@ -57,7 +57,7 @@ export default {
       await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
         console.log(res)
         this.records = res.data.data.records
-        // 
+        // 发射自定义事件并传递参数
         this.$emit('records',this.records)
       })
       

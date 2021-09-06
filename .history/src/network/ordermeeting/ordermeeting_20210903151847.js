@@ -9,7 +9,7 @@ export function getAllOrderMeeting(){
 // 删除订货
 export function deletordermeeting(row){
     return request({
-        url:'/orderMeeting/' + row,
+        url:'/orderMeeting/' + row.id,
         method:'delete'
     })
 }
