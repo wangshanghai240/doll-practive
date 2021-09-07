@@ -1,4 +1,3 @@
-/* eslint-disable vue/no-parsing-error */
 <template>
   <div class="admin">
     <el-container>
@@ -23,33 +22,27 @@
           <el-menu
             class="el-menu-vertical-demo"
             active-text-color="#1860e6"
-            :router='true'
+            :router="true"
             :unique-opened="true"
             :collapse="iscollapse"
             :collapse-transition="false"
-            :default-active="this.$route.path"
           >
           <!-- 一级菜单 -->
-          <!-- <el-submenu
-          v-for="item in router[2].children"
-          :key="item.path"
-          :index='item.path'
-          v-if='item.chidlren'
-          >
+          <el-submenu v-for="item in routers" :key="item.path">
             <template>
+              <img src="" alt="">
               <span>{{item.name}}</span>
             </template>
-            <mutil-menu-item :route='route'></mutil-menu-item>
+            <el-menu-item>
+              <span>{{item.children.name}}</span>
+            </el-menu-item>
           </el-submenu>
-          
-          <menu-item :menuitemroute='route'></menu-item> -->
-          
-            <el-menu-item index="/admin/dashboard">
+            <!-- <el-menu-item index="/admin/dashboard">
               <img src="~assets/image/navmenu/home-ff.svg" alt="" />
               <span>首页</span>
             </el-menu-item>
-            
-            <el-submenu index="/admin/dashboard">
+            <!-- 面料菜单 -->
+            <!-- <el-submenu index="/admin/dashboard">
               <template slot="title">
                 <img src="~assets/image/navmenu/mianliao.svg" alt="" />
                 <span>面料</span>
@@ -64,27 +57,27 @@
                   <span>采购列表</span>
                 </el-menu-item>
               </el-menu-item-group>
-            </el-submenu>
+            </el-submenu> -->
             <!-- 订货会 -->
-            <el-menu-item index="/admin/ordermeeting">
+            <!-- <el-menu-item index="/admin/ordermeeting">
               <img src="~assets/image/navmenu/dinghuohui.svg" alt="" />
               <span slot="title">订货会</span>
-            </el-menu-item>
+            </el-menu-item> -->
             <!-- 商品列表 -->
-            <el-menu-item index="/admin/ordershop">
+            <!-- <el-menu-item index="/admin/ordershop">
               <img src="~assets/image/navmenu/shangpinliebiao.svg" alt="" />
               <span slot="title">商品列表</span>
-            </el-menu-item> 
-            <!-- 用户列表-->
-            <el-menu-item index="/admin/user">
+            </el-menu-item> -->
+            <!-- 用户列表 -->
+            <!-- <el-menu-item index="/admin/user">
               <img src="~assets/image/navmenu/xingzhuang1.svg" alt="" />
               <span slot="title">用户列表</span>
-            </el-menu-item> 
-            <!-- 日志列表-->
-            <el-menu-item index="/admin/syslog">
+            </el-menu-item> -->
+            <!-- 日志列表 -->
+            <!-- <el-menu-item index="/admin/syslog">
               <img src="~assets/image/navmenu/rizhiliebiao.svg" alt="" />
               <span slot="title">日志列表</span>
-            </el-menu-item> 
+            </el-menu-item>  -->
           </el-menu>
         </el-aside>
         <el-main>
@@ -100,8 +93,6 @@
 import Logo from "components/content/Logo.vue";
 import BreadCrumb from "components/content/BreadCrumb.vue";
 import Logout from "components/content/Logout.vue";
-import MutilMenuItem from 'components/content/MutilMenuItem.vue'
-import MenuItem from 'components/content/MenuItem.vue'
 
 import { getuserinfo } from 'network/user/user'
 export default {
@@ -109,31 +100,19 @@ export default {
     Logo,
     BreadCrumb,
     Logout,
-    MutilMenuItem,
-    MenuItem
   },
   name: "Admin",
   data() {
     return {
-      // sidebar的显隐
       iscollapse: false,
       currentindex: 0,
-      // 保存路由列表
-      route:[]
     };
   },
   created(){
     this.getuserinfo()
-    // 将路由列表保存在route中
-    console.log(this.router)
-    this.route = this.$router.options.routes
   },
   computed: {
-    router(){
-      // 获取routes列表
-      console.log(this.$router.options.routes)
-      return  this.$router.options.routes
-    }
+    
   },
   methods: {
     togglecollapse() {

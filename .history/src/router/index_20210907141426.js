@@ -23,14 +23,12 @@ let routes = [
     {
         // 将更目录下的重定向到/login,可以解决路径不显示问题
         path: '/',
-        redirect: '/login',
-        hidden:true
+        redirect: '/login'
     },
     {
         path: '/login',
         name: 'login',
-        component: Login,
-        hidden:true
+        component: Login
     },
     {
         path: '/admin',
@@ -40,13 +38,10 @@ let routes = [
                 component: Dashboard,
                 name:'首页'
             },
-            {
-                path: '',
-                redirect: 'dashboard',
-                meta:{
-                    hidden:true
-                }
-            },
+            // {
+            //     path: '',
+            //     redirect: 'dashboard'
+            // },
             {
                 path: 'fabric',
                 component: Fabric,

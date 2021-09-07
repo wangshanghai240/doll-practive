@@ -38,7 +38,7 @@
     </el-table>
 
     <!-- dialog对话框 -->
-    <el-dialog title="数据更改" :visible.sync="dialogFormVisible" >
+    <el-dialog title="数据更改" :visible.sync="dialogFormVisible" v-test=''>
       <el-form>
         <el-form-item label="活动名称" label-width="120" :required="true">
           <el-input
@@ -86,19 +86,19 @@ export default {
       color:'red'
     };
   },
-  // directives:{
-  //   test:{
-  //     bind(el){
-  //       console.log(el)
-  //       console.log()
-  //       el.style.color = 'red'
-  //     },
-  //     inserted(){},
-  //     update(){},
-  //     componentUpdated(){},
-  //     unbind(){}
-  //   }
-  // },
+  directives:{
+    test:{
+      bind(el,binding,vnode){
+        console.log(el)
+        console.log()
+        this.style.color = binding.value
+      },
+      inserted(){},
+      update(){},
+      componentUpdated(){},
+      unbind(){}
+    }
+  }
   // 页面一创建调用该方法获取数据
   // created() {
   //   this.getorderlist();

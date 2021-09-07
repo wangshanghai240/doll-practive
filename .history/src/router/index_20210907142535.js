@@ -43,9 +43,7 @@ let routes = [
             {
                 path: '',
                 redirect: 'dashboard',
-                meta:{
-                    hidden:true
-                }
+                hidden:true
             },
             {
                 path: 'fabric',

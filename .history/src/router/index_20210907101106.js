@@ -16,21 +16,17 @@ const User = () => import('views/admin/user/User')
 const SysLog = () => import('views/admin/syslog/SysLog')
 const ReqList = () => import('views/admin/fabric/childComp/ReqList')
 const ShopList = () => import('views/admin/fabric/childComp/ShopList')
-const NotFind =() => import('components/common/404')
 
 // 路由列表(路径，组件映射关系)
-let routes = [
-    {
+let routes = [{
         // 将更目录下的重定向到/login,可以解决路径不显示问题
         path: '/',
-        redirect: '/login',
-        hidden:true
+        redirect: '/login'
     },
     {
         path: '/login',
         name: 'login',
-        component: Login,
-        hidden:true
+        component: Login
     },
     {
         path: '/admin',
@@ -42,10 +38,7 @@ let routes = [
             },
             {
                 path: '',
-                redirect: 'dashboard',
-                meta:{
-                    hidden:true
-                }
+                redirect: 'dashboard'
             },
             {
                 path: 'fabric',
@@ -88,14 +81,6 @@ let routes = [
             requireAuth: true
         },
         // 进入该路径需要验证，登录验证一般都是在全局路由使用导航守卫beforeEach()或者在路由列表中使用路由守卫beforeEnter
-    },
-    {
-        path:'*',
-        component:NotFind,
-        name:'404',
-        meta:{
-            title:'404'
-        }
     }
 
 ]

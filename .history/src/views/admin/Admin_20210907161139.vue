@@ -30,26 +30,15 @@
             :default-active="this.$route.path"
           >
           <!-- 一级菜单 -->
-          <!-- <el-submenu
-          v-for="item in router[2].children"
-          :key="item.path"
-          :index='item.path'
-          v-if='item.chidlren'
-          >
-            <template>
-              <span>{{item.name}}</span>
-            </template>
-            <mutil-menu-item :route='route'></mutil-menu-item>
-          </el-submenu>
+          <!-- <mutil-menu-item :route='route'></mutil-menu-item> -->
+          <menu-item :menuitemroute='route'></menu-item>
           
-          <menu-item :menuitemroute='route'></menu-item> -->
-          
-            <el-menu-item index="/admin/dashboard">
+            <!-- <el-menu-item index="/admin/dashboard">
               <img src="~assets/image/navmenu/home-ff.svg" alt="" />
               <span>首页</span>
-            </el-menu-item>
+            </el-menu-item>-->
             
-            <el-submenu index="/admin/dashboard">
+            <!-- <el-submenu index="/admin/dashboard">
               <template slot="title">
                 <img src="~assets/image/navmenu/mianliao.svg" alt="" />
                 <span>面料</span>
@@ -64,27 +53,27 @@
                   <span>采购列表</span>
                 </el-menu-item>
               </el-menu-item-group>
-            </el-submenu>
+            </el-submenu> -->
             <!-- 订货会 -->
-            <el-menu-item index="/admin/ordermeeting">
+            <!-- <el-menu-item index="/admin/ordermeeting">
               <img src="~assets/image/navmenu/dinghuohui.svg" alt="" />
               <span slot="title">订货会</span>
-            </el-menu-item>
+            </el-menu-item> -->
             <!-- 商品列表 -->
-            <el-menu-item index="/admin/ordershop">
+            <!-- <el-menu-item index="/admin/ordershop">
               <img src="~assets/image/navmenu/shangpinliebiao.svg" alt="" />
               <span slot="title">商品列表</span>
-            </el-menu-item> 
-            <!-- 用户列表-->
-            <el-menu-item index="/admin/user">
+            </el-menu-item> -->
+            <!-- 用户列表 -->
+            <!-- <el-menu-item index="/admin/user">
               <img src="~assets/image/navmenu/xingzhuang1.svg" alt="" />
               <span slot="title">用户列表</span>
-            </el-menu-item> 
-            <!-- 日志列表-->
-            <el-menu-item index="/admin/syslog">
+            </el-menu-item> -->
+            <!-- 日志列表 -->
+            <!-- <el-menu-item index="/admin/syslog">
               <img src="~assets/image/navmenu/rizhiliebiao.svg" alt="" />
               <span slot="title">日志列表</span>
-            </el-menu-item> 
+            </el-menu-item>  -->
           </el-menu>
         </el-aside>
         <el-main>
@@ -125,7 +114,6 @@ export default {
   created(){
     this.getuserinfo()
     // 将路由列表保存在route中
-    console.log(this.router)
     this.route = this.$router.options.routes
   },
   computed: {

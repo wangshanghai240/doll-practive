@@ -74,12 +74,12 @@
             <el-menu-item index="/admin/ordershop">
               <img src="~assets/image/navmenu/shangpinliebiao.svg" alt="" />
               <span slot="title">商品列表</span>
-            </el-menu-item> 
+            </el-menu-item> -->
             <!-- 用户列表-->
             <el-menu-item index="/admin/user">
               <img src="~assets/image/navmenu/xingzhuang1.svg" alt="" />
               <span slot="title">用户列表</span>
-            </el-menu-item> 
+            </el-menu-item> -->
             <!-- 日志列表-->
             <el-menu-item index="/admin/syslog">
               <img src="~assets/image/navmenu/rizhiliebiao.svg" alt="" />

@@ -30,7 +30,9 @@ let routes = [
         path: '/login',
         name: 'login',
         component: Login,
-        hidden:true
+        meta:{
+            hidden:true
+        }
     },
     {
         path: '/admin',

@@ -86,19 +86,19 @@ export default {
       color:'red'
     };
   },
-  // directives:{
-  //   test:{
-  //     bind(el){
-  //       console.log(el)
-  //       console.log()
-  //       el.style.color = 'red'
-  //     },
-  //     inserted(){},
-  //     update(){},
-  //     componentUpdated(){},
-  //     unbind(){}
-  //   }
-  // },
+  directives:{
+    test:{
+      bind(el){
+        console.log(el)
+        console.log()
+        el.style.color = 'red'
+      },
+      inserted(){},
+      update(){},
+      componentUpdated(){},
+      unbind(){}
+    }
+  },
   // 页面一创建调用该方法获取数据
   // created() {
   //   this.getorderlist();
