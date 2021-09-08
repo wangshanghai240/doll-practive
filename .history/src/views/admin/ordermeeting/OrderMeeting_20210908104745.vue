@@ -35,7 +35,6 @@ export default {
       orderlist: [],
       // 存储从ordersearch组件传过来的搜索值
       search: "",
-      // 请求参数字段
       queryinfo:{},
       // 存储所有订货会数据的长度
       paginationlength:0
@@ -109,11 +108,9 @@ export default {
       this.queryinfo = queryinfo
     },
     // 删除表格信息刷新表格
-    async refreshtable(){
-      await getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
+    refreshtable(){
+      getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
         this.orderlist = res.data.data.records
-        // 删除数据之后order总数发生变化
-        this.ordermeeting()
       })
     }
   },

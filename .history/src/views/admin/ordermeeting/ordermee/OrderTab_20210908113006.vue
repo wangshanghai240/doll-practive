@@ -153,14 +153,9 @@ export default {
 
 <style>
 .name{
-  width:40%;
+  width:38%;
 }
-/* 对话框 */
 .el-dialog{
-  width:27%;
-}
-/* label */
-.el-form-item__label{
-  width:79px;
+  width:40%;
 }
 </style>

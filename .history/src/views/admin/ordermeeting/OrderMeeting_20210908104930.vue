@@ -109,11 +109,9 @@ export default {
       this.queryinfo = queryinfo
     },
     // 删除表格信息刷新表格
-    async refreshtable(){
-      await getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
+    refreshtable(){
+      getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
         this.orderlist = res.data.data.records
-        // 删除数据之后order总数发生变化
-        this.ordermeeting()
       })
     }
   },

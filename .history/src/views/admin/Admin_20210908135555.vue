@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-parsing-error */
 <template>
   <div class="admin">
     <el-container>
@@ -137,11 +138,9 @@ export default {
     }
   },
   methods: {
-    // 点击隐藏和显示sidebar
     togglecollapse() {
       this.iscollapse = !this.iscollapse;
     },
-    // 这个暂时没用
     getuserinfo(){
       getuserinfo().then(res =>{
         console.log(res)
@@ -185,6 +184,6 @@ export default {
   width: 20px;
 }
 .isactive {
-  color: #e6187f;
+  color: #1860e6;
 }
 </style>

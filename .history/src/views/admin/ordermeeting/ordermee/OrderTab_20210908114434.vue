@@ -153,7 +153,7 @@ export default {
 
 <style>
 .name{
-  width:40%;
+  width:38%;
 }
 /* 对话框 */
 .el-dialog{

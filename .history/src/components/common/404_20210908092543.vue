@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-.notfind{
+.notfind h1{
   /* 垂直居中 */
   height:50vh;
   transform:translateY(-50%);

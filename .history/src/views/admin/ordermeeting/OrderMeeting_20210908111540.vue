@@ -112,8 +112,7 @@ export default {
     async refreshtable(){
       await getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
         this.orderlist = res.data.data.records
-        // 删除数据之后order总数发生变化
-        this.ordermeeting()
+        this.getAllOrderMeeting()
       })
     }
   },

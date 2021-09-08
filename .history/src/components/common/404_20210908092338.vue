@@ -11,11 +11,9 @@ export default {
 </script>
 
 <style scoped>
-.notfind{
-  /* 垂直居中 */
+.notfind h1{
   height:50vh;
   transform:translateY(-50%);
-  /* 水平居中 */
   text-align: center;
 }
 </style>

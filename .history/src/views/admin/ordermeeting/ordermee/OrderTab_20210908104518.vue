@@ -31,21 +31,14 @@
           <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
         </template> -->
         <template v-slot="scope">
-          <el-button size="mini" @click.native="handleEdit(scope.row)"
-            >修改</el-button
-          >
-          <el-button
-            size="mini"
-            type="danger"
-            @click.native="deleteorder(scope.row)"
-            >删除</el-button
-          >
+          <el-button size="mini" @click.native="handleEdit(scope.row)">修改</el-button>
+          <el-button size="mini" type="danger" @click.native="deleteorder(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <!-- dialog对话框 -->
-    <el-dialog title="数据更改" :visible.sync="dialogFormVisible">
+    <el-dialog title="数据更改" :visible.sync="dialogFormVisible" >
       <el-form>
         <el-form-item label="活动名称" label-width="120" :required="true">
           <el-input
@@ -55,7 +48,11 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="ID" label-width="120" :required="true">
-          <el-input class="name" autocomplete="off" v-model="row.id"></el-input>
+          <el-input
+            class="name"
+            autocomplete="off"
+            v-model="row.id"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -67,10 +64,7 @@
 </template>
 
 <script>
-import {
-  updateOrder,
-  deletordermeeting,
-} from "network/ordermeeting/ordermeeting";
+import { updateOrder, deletordermeeting, getordermeeting } from "network/ordermeeting/ordermeeting";
 export default {
   name: "OrderTab",
   props: {
@@ -88,8 +82,8 @@ export default {
       dialogFormVisible: false,
       // 存储当前表格行的数据
       row: {},
-      tabrecords: [],
-      // color: "red",
+      tabrecords:[],
+      color:'red'
     };
   },
   // directives:{
@@ -120,47 +114,24 @@ export default {
       this.row = row;
     },
     // 修改对话框确定按钮
-    updatelist() {
+     updatelist() {
       //  发送请求
-      updateOrder(this.row).then((res) => {
-        this.$message.success(res.data.message);
-      });
-      this.dialogFormVisible = !this.dialogFormVisible;
+       updateOrder(this.row).then((res)=>{
+        this.$message.success(res.data.message)
+      })
+        this.dialogFormVisible = !this.dialogFormVisible;
     },
     // 删除订单按钮
-    deleteorder(row) {
-      // 发送删除请求,先确认是否删除
-      this.$confirm("确认删除?", "警告", {
-        type: "warning",
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+    async deleteorder(row){
+      // 发送删除请求
+      await deletordermeeting(row.id).then(res=>{
+        this.$message.success(res.data.message)
+        this.$emit('refresh')
       })
-        .then(() => {
-          // 点击确认之后发送删除请求
-          deletordermeeting(row.id).then((res) => {
-            this.$message.success(res.data.message);
-            // 发射事件刷新表格数据
-            this.$emit("refresh");
-          });
-        })
-        .catch(() => {
-          this.$message.info("已取消删除");
-        });
-    },
+    }
   },
 };
 </script>
 
 <style>
-.name{
-  width:40%;
-}
-/* 对话框 */
-.el-dialog{
-  width:27%;
-}
-/* label */
-.el-form-item__label{
-  width:79px;
-}
 </style>

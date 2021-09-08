@@ -54,7 +54,7 @@
             v-model="row.name"
           ></el-input>
         </el-form-item>
-        <el-form-item label="ID" label-width="120" :required="true">
+        <el-form-item label="ID" label-width="120px" :required="true">
           <el-input class="name" autocomplete="off" v-model="row.id"></el-input>
         </el-form-item>
       </el-form>
@@ -153,14 +153,9 @@ export default {
 
 <style>
 .name{
-  width:40%;
+  width:38%;
 }
-/* 对话框 */
 .el-dialog{
-  width:27%;
-}
-/* label */
-.el-form-item__label{
-  width:79px;
+  width:30%;
 }
 </style>

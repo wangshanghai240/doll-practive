@@ -185,6 +185,6 @@ export default {
   width: 20px;
 }
 .isactive {
-  color: #e6187f;
+  color: #1860e6;
 }
 </style>

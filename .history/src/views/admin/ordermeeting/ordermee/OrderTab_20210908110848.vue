@@ -89,7 +89,7 @@ export default {
       // 存储当前表格行的数据
       row: {},
       tabrecords: [],
-      // color: "red",
+      color: "red",
     };
   },
   // directives:{
@@ -136,7 +136,6 @@ export default {
         cancelButtonText: "取消",
       })
         .then(() => {
-          // 点击确认之后发送删除请求
           deletordermeeting(row.id).then((res) => {
             this.$message.success(res.data.message);
             // 发射事件刷新表格数据
@@ -152,15 +151,4 @@ export default {
 </script>
 
 <style>
-.name{
-  width:40%;
-}
-/* 对话框 */
-.el-dialog{
-  width:27%;
-}
-/* label */
-.el-form-item__label{
-  width:79px;
-}
 </style>

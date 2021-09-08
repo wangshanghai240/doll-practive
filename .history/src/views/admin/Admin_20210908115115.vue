@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-parsing-error */
 <template>
   <div class="admin">
     <el-container>
@@ -26,7 +27,7 @@
             :unique-opened="true"
             :collapse="iscollapse"
             :collapse-transition="false"
-            :default-active="path"
+            :default-active="$route.path"
           >
           <!-- 一级菜单 -->
           <!-- <el-submenu
@@ -130,18 +131,12 @@ export default {
       // 获取routes列表
       console.log(this.$router.options.routes)
       return  this.$router.options.routes
-    },
-    // 当前路径
-    path(){
-      return this.$route.path
     }
   },
   methods: {
-    // 点击隐藏和显示sidebar
     togglecollapse() {
       this.iscollapse = !this.iscollapse;
     },
-    // 这个暂时没用
     getuserinfo(){
       getuserinfo().then(res =>{
         console.log(res)
@@ -185,6 +180,6 @@ export default {
   width: 20px;
 }
 .isactive {
-  color: #e6187f;
+  color: #1860e6;
 }
 </style>
