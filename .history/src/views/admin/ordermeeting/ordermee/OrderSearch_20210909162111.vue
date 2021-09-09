@@ -11,7 +11,7 @@
     <div class="btn">
       <el-button type="primary" @click="searchinfo">搜索</el-button>
       <el-button type="warning" @click="reset">重置</el-button>
-      <el-button type="warning" @click="exportexcel">导出</el-button>
+      <el-button type='warning' @click="exportexcel">导出</el-button>
     </div>
   </div>
 </template>
@@ -34,27 +34,7 @@ export default {
     return {
       search: "",
       resetlist:[],
-      queryinfo:{},
-      // 模拟数据
-      ordershopdata:{
-        bomUpdate: "",
-        craftStatus: "",
-        detailsImport: "",
-        dlmc: "",
-        dqzt: "",
-        fabricDemand: "",
-        ghsdm: "",
-        ingredientsDemand: "",
-        isNumberChange: "",
-        limit: 10,
-        lx: "",
-        orderNumber: "",
-        page: 1,
-        sourceId: "",
-        sourceType: "",
-        spdm: "",
-        state: ""
-      }
+      queryinfo:{}
     };
   },
   methods: {
@@ -87,25 +67,15 @@ export default {
     // getorderlist(){
     //   this.$emit('getorderlist')
     // }
-    // 导出excel,练习使用
-    async exportexcel(){
-      await exportexcel(this.ordershopdata).then(res=>{
+    // 导出excel
+    exportexcel(){
+      exportexcel().then(res=>{
         console.log(res)
-        const {data,headers} = res
-        const fileName = headers['content-disposition'].replace(/\w+;filename=(.*)/, '$1')
-        // 创建blob对象并设置文件类型
-        const blob = new Blob([data],{type:'application/vnd.ms-excel'})
-        console.log(blob)
-        // 创建对象url就不用读取文件内容到JavaScript就可以使用文件
+        const blob = new Blob([res.data],{type:'application/vnd.ms-excel'})
         const blobUrl = window.URL.createObjectURL(blob)
-        // TODO暂时不知道这个代码有什么用
         const link = document.createElement('a')
         link.href = blobUrl
-        // 自定义文件名
-        link.download = decodeURI(fileName)
-        // 下载文件
         link.click()
-        // 使用完数据最好释放与之关联的内存
         window.URL.revokeObjectURL(blobUrl)
       })
     }

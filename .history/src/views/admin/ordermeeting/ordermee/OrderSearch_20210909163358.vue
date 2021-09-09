@@ -93,19 +93,13 @@ export default {
         console.log(res)
         const {data,headers} = res
         const fileName = headers['content-disposition'].replace(/\w+;filename=(.*)/, '$1')
-        // 创建blob对象并设置文件类型
         const blob = new Blob([data],{type:'application/vnd.ms-excel'})
         console.log(blob)
-        // 创建对象url就不用读取文件内容到JavaScript就可以使用文件
         const blobUrl = window.URL.createObjectURL(blob)
-        // TODO暂时不知道这个代码有什么用
         const link = document.createElement('a')
         link.href = blobUrl
-        // 自定义文件名
         link.download = decodeURI(fileName)
-        // 下载文件
         link.click()
-        // 使用完数据最好释放与之关联的内存
         window.URL.revokeObjectURL(blobUrl)
       })
     }
