@@ -4,6 +4,7 @@
       ref="ordsea"
       @searchdata="searchdata"
       @resetlist="resetlist"
+      @getorderlist="ccc"
       :queryinfos='queryinfo'
     ></order-search>
     <order-tab :tableDatas="orderlist" ref="ordertab" @refresh='refreshtable'></order-tab>
@@ -97,9 +98,9 @@ export default {
     resetlist(resetlist) {
       this.orderlist = resetlist;
     },
-    // ccc() {
-    //   this.
-    // },
+    ccc() {
+      this.
+    },
     records(records) {
       this.orderlist = records;
     },

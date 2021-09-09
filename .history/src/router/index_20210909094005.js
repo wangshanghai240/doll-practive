@@ -38,7 +38,8 @@ let routes = [
         name:'首页',
         children: [{
                 path: 'dashboard',
-                component: Dashboard
+                component: Dashboard,
+                name:'首页'
             },
             {
                 path: '',

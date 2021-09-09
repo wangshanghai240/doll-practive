@@ -6,6 +6,7 @@
       prefix-icon="el-icon-search"
       v-model="search"
       clearable
+      @clear="getorderlist"
     >
     </el-input>
     <div class="btn">

@@ -65,7 +65,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="cancelone">取 消</el-button>
+        <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click.native="updatelist">确 定</el-button>
       </div>
     </el-dialog>
@@ -84,7 +84,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="canceltwo">取 消</el-button>
+        <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click="addconfirm">确 定</el-button>
       </div>
     </el-dialog>
@@ -167,14 +167,10 @@ export default {
       this.row = row;
     },
     // 修改对话框取消按钮
-    cancelone(){
-      this.$message.info('已取消修改')
+    cancel(){
+      // this.$message.info('已取消修改')
       this.dialogFormVisibleone = !this.dialogFormVisibleone;
-    },
-    // 新增订货取消按钮
-    canceltwo(){
-      this.$message.info('已取消新增订货')
-      this.dialogFormVisibletwo = !this.dialogFormVisibletwo
+      this.dialogFormVisibletwo = !this.dialogFormVisibletwo;
     },
     // 修改对话框确定按钮
     updatelist() {

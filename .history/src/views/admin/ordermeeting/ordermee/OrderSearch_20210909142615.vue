@@ -6,6 +6,7 @@
       prefix-icon="el-icon-search"
       v-model="search"
       clearable
+      @clear="getorderlist"
     >
     </el-input>
     <div class="btn">
@@ -51,6 +52,7 @@ export default {
     // 重置按钮事件
     async reset(){
       // 点击重置获取page,limit订货list
+      console.log(this.queryinfos)
       // 将父组件传递过来的queryinfos存储在queryinfo
       this.queryinfo = this.queryinfos
       // 发起网络请求
@@ -62,9 +64,9 @@ export default {
         console.log(err)
       })
     },
-    // getorderlist(){
-    //   this.$emit('getorderlist')
-    // }
+    getorderlist(){
+      this.$emit('getorderlist')
+    }
   },
 };
 </script>

@@ -4,7 +4,7 @@
       ref="ordsea"
       @searchdata="searchdata"
       @resetlist="resetlist"
-      :queryinfos='queryinfo'
+      @getorderlist="ccc"
     ></order-search>
     <order-tab :tableDatas="orderlist" ref="ordertab" @refresh='refreshtable'></order-tab>
     <pagination
@@ -46,9 +46,9 @@ export default {
     this.ordermeeting();
   },
   methods: {
-    async ordermeeting() {
+    ordermeeting() {
       // 发送网络请求获取所有订货list
-       getAllOrderMeeting()
+      getAllOrderMeeting()
         .then((res) => {
           console.log(res);
           // 将数据长度保存在paginationlength
@@ -61,7 +61,7 @@ export default {
           });
         });
         // 对订货列表查询
-      await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
+      getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
         this.orderlist = res.data.data.records
       },err=>{
         this.$message.warning(err.data.message)
@@ -97,9 +97,11 @@ export default {
     resetlist(resetlist) {
       this.orderlist = resetlist;
     },
-    // ccc() {
-    //   this.
-    // },
+    ccc() {
+      getAllOrderMeeting().then((res) => {
+        this.orderlist = res.data.data;
+      });
+    },
     records(records) {
       this.orderlist = records;
     },

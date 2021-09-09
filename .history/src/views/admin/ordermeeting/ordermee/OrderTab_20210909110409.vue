@@ -168,12 +168,11 @@ export default {
     },
     // 修改对话框取消按钮
     cancelone(){
-      this.$message.info('已取消修改')
+      // this.$message.info('已取消修改')
       this.dialogFormVisibleone = !this.dialogFormVisibleone;
     },
     // 新增订货取消按钮
     canceltwo(){
-      this.$message.info('已取消新增订货')
       this.dialogFormVisibletwo = !this.dialogFormVisibletwo
     },
     // 修改对话框确定按钮

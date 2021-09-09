@@ -6,6 +6,7 @@
       prefix-icon="el-icon-search"
       v-model="search"
       clearable
+      @clear="getorderlist"
     >
     </el-input>
     <div class="btn">
@@ -20,19 +21,18 @@ import { getordermeeting } from 'network/ordermeeting/ordermeeting'
 
 export default {
   name: "OrderSearch",
-  props: {
-    queryinfos: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
-  },
+  // props: {
+  //   ordersearch: {
+  //     type: Array,
+  //     default() {
+  //       return [];
+  //     },
+  //   },
+  // },
   data() {
     return {
       search: "",
-      resetlist:[],
-      queryinfo:{}
+      resetlist:[]
     };
   },
   methods: {
@@ -47,24 +47,21 @@ export default {
         // 发射事件并将search传递出去
         this.$emit('searchdata',this.search)
       }
+      
     },
     // 重置按钮事件
-    async reset(){
-      // 点击重置获取page,limit订货list
-      // 将父组件传递过来的queryinfos存储在queryinfo
-      this.queryinfo = this.queryinfos
-      // 发起网络请求
-      await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
-        this.resetlist = res.data.data.records
+    reset(){
+      // 点击重置获取所有订货list
+      getordermeeting().then(res =>{
+        this.resetlist = res.data.data
         this.search = ''
         this.$emit('resetlist',this.resetlist)
-      },err=>{
-        console.log(err)
       })
+      
     },
-    // getorderlist(){
-    //   this.$emit('getorderlist')
-    // }
+    getorderlist(){
+      this.$emit('getorderlist')
+    }
   },
 };
 </script>
