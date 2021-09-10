@@ -177,9 +177,9 @@ export default {
       this.dialogFormVisibletwo = !this.dialogFormVisibletwo
     },
     // 修改对话框确定按钮
-    updatelist() {
+    async updatelist() {
       //  发送请求
-      updateOrder(this.row).then((res) => {
+      await updateOrder(this.row).then((res) => {
         this.$message.success(res.data.message);
       });
       this.dialogFormVisibleone = !this.dialogFormVisibleone;

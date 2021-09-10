@@ -12,3 +12,20 @@ export function exportexcel(data){
         }
     })
 }
+// 导入(upload)商品数据
+export function uploaddata(source,source1){
+    return request({
+        url:'/eshopOrMeetingGoods/upload/import',
+        method:'post',
+        headers:{'Content-Type':'multipart/form-data'},
+        // 请求体参数
+        data:{
+            source,
+            ...source1
+        },
+        // url后面的参数
+        params:{
+            ...source1
+        }
+    })
+}

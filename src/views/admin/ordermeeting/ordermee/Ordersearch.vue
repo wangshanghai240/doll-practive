@@ -12,13 +12,23 @@
       <el-button type="primary" @click="searchinfo">搜索</el-button>
       <el-button type="warning" @click="reset">重置</el-button>
       <el-button type="warning" @click="exportexcel">导出</el-button>
+      <!-- upload -->
+      <el-upload
+        class="upload-demo"
+        :action="url"
+        :limit="1"
+        :file-list="filelist"
+        :on-success="uploadexcel"
+      >
+        <el-button size="small" type="primary">商品上传</el-button>
+      </el-upload>
     </div>
   </div>
 </template>
 
 <script>
-import { getordermeeting } from 'network/ordermeeting/ordermeeting'
-import { exportexcel } from 'network/ordershop/ordershop'
+import { getordermeeting } from "network/ordermeeting/ordermeeting";
+import { exportexcel, uploaddata } from "network/ordershop/ordershop";
 
 export default {
   name: "OrderSearch",
@@ -33,10 +43,10 @@ export default {
   data() {
     return {
       search: "",
-      resetlist:[],
-      queryinfo:{},
+      resetlist: [],
+      queryinfo: {},
       // 模拟数据
-      ordershopdata:{
+      ordershopdata: {
         bomUpdate: "",
         craftStatus: "",
         detailsImport: "",
@@ -47,68 +57,85 @@ export default {
         ingredientsDemand: "",
         isNumberChange: "",
         limit: 10,
-        lx: "",
-        orderNumber: "",
         page: 1,
-        sourceId: "",
-        sourceType: "",
-        spdm: "",
-        state: ""
-      }
+      },
+      uploadexcels: {
+        sourceId: "1435798985192374274",
+        sourceType: "1",
+      },
+      url:'http://192.168.100.72:8769/outsource/eshopOrMeetingGoods/upload/import',
+      // 文件列表
+      filelist:[]
     };
   },
   methods: {
     // 查询事件监听处理
     searchinfo() {
       // 如果search为空
-      if(this.search == ''){
-        this.$message.error('请先输入活动名称')
+      if (this.search == "") {
+        this.$message.error("请先输入活动名称");
       }
       // search不为空
-      else{
+      else {
         // 发射事件并将search传递出去
-        this.$emit('searchdata',this.search)
+        this.$emit("searchdata", this.search);
       }
     },
     // 重置按钮事件
-    async reset(){
+    async reset() {
       // 点击重置获取page,limit订货list
       // 将父组件传递过来的queryinfos存储在queryinfo
-      this.queryinfo = this.queryinfos
+      this.queryinfo = this.queryinfos;
       // 发起网络请求
-      await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
-        this.resetlist = res.data.data.records
-        this.search = ''
-        this.$emit('resetlist',this.resetlist)
-      },err=>{
-        console.log(err)
-      })
+      await getordermeeting(this.queryinfo, this.queryinfo.query).then(
+        (res) => {
+          this.resetlist = res.data.data.records;
+          this.search = "";
+          this.$emit("resetlist", this.resetlist);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     },
     // getorderlist(){
     //   this.$emit('getorderlist')
     // }
     // 导出excel,练习使用
-    async exportexcel(){
-      await exportexcel(this.ordershopdata).then(res=>{
-        console.log(res)
-        const {data,headers} = res
-        const fileName = headers['content-disposition'].replace(/\w+;filename=(.*)/, '$1')
+    async exportexcel() {
+      await exportexcel(this.ordershopdata).then((res) => {
+        console.log(res);
+        const fileName = res.headers["content-disposition"].replace(
+          /\w+;filename=(.*)/,
+          "$1"
+        );
         // 创建blob对象并设置文件类型
-        const blob = new Blob([data],{type:'application/vnd.ms-excel'})
-        console.log(blob)
+        const blob = new Blob([res.data], { type: "application/vnd.ms-excel" });
+        console.log(blob);
         // 创建对象url就不用读取文件内容到JavaScript就可以使用文件
-        const blobUrl = window.URL.createObjectURL(blob)
+        const blobUrl = window.URL.createObjectURL(blob);
         // TODO暂时不知道这个代码有什么用
-        const link = document.createElement('a')
-        link.href = blobUrl
+        const link = document.createElement("a");
+        link.href = blobUrl;
         // 自定义文件名
-        link.download = decodeURI(fileName)
+        link.download = decodeURI(fileName);
         // 下载文件
-        link.click()
+        link.click();
         // 使用完数据最好释放与之关联的内存
-        window.URL.revokeObjectURL(blobUrl)
-      })
-    }
+        window.URL.revokeObjectURL(blobUrl);
+      });
+    },
+    // 上传商品，练习使用
+    async uploadexcel(response,file) {
+      console.log(file)
+      console.log(response)
+      this.filelist = file
+      let formdata = new FormData()
+      formdata.append('file',this.filelist)
+      await uploaddata(formdata,this.uploadexcels).then((res) => {
+        console.log(res);
+      });
+    },
   },
 };
 </script>

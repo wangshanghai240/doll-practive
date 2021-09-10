@@ -48,7 +48,7 @@ export default {
   methods: {
     async ordermeeting() {
       // 发送网络请求获取所有订货list
-       getAllOrderMeeting()
+        getAllOrderMeeting()
         .then((res) => {
           console.log(res);
           // 将数据长度保存在paginationlength
