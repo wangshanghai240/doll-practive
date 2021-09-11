@@ -15,10 +15,10 @@
       <!-- upload -->
       <el-upload
         class="upload-demo"
-        :action="url"
+        action="ccc"
+        :http-request="upload"
         :limit="1"
         :file-list="filelist"
-        :on-success="uploadexcel"
       >
         <el-button size="small" type="primary">商品上传</el-button>
       </el-upload>
@@ -63,9 +63,8 @@ export default {
         sourceId: "1435798985192374274",
         sourceType: "1",
       },
-      url:'http://192.168.100.72:8769/outsource/eshopOrMeetingGoods/upload/import',
       // 文件列表
-      filelist:[]
+      filelist: [],
     };
   },
   methods: {
@@ -126,14 +125,20 @@ export default {
       });
     },
     // 上传商品，练习使用
-    async uploadexcel(response,file) {
-      console.log(file)
-      console.log(response)
-      this.filelist = file
-      let formdata = new FormData()
-      formdata.append('file',this.filelist)
-      await uploaddata(formdata,this.uploadexcels).then((res) => {
-        console.log(res);
+    async upload(params) {
+      // params就是包含我们上传的参数
+      console.log(params);
+      console.log(params.file);
+      let files = params.file,
+      // 创建formdata对象,方便我们将文件转化为formdata格式(二进制)
+        formdata = new FormData();
+        // 将我们要上传的文件添加进formdata中
+        formdata.append("file", files);
+        
+        console.log(formdata.get('file'));
+        // 发起网络请求
+        await uploaddata(formdata, this.uploadexcels).then((value) => {
+          this.$message.success(value.data.message)
       });
     },
   },

@@ -36,7 +36,9 @@ export function request(config) {
                     window.location.href='/login'
                 })
             break
-                
+        }
+        if(response.data.status === 500){
+            this.$message.error(response.data.error)
         }
         // 拦截之后需要return 响应
         return response
