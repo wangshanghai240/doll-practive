@@ -31,7 +31,7 @@ import {
     Main,
     Calendar,
     // PageHeader,
-    // Loading,
+    Loading,
     MessageBox,
     Message,
     // Notification
@@ -68,7 +68,7 @@ const element = {
         Vue.use(Calendar);
         // Vue.use(PageHeader);
 
-        // Vue.use(Loading.directive);
+        Vue.use(Loading.directive);
         // Vue.prototype.$loading = Loading.service;
         Vue.prototype.$msgbox = MessageBox;
         // Vue.prototype.$alert = MessageBox.alert;
