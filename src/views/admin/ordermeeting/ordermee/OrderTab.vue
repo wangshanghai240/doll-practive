@@ -7,7 +7,8 @@
       height="520px"
     >
       <!-- 表头信息 -->
-      <el-table-column prop="id" label="序号" width="60" type='index'> </el-table-column>
+      <el-table-column prop="id" label="序号" width="60" type="index">
+      </el-table-column>
       <el-table-column prop="id" label="ID" width="180"> </el-table-column>
       <el-table-column
         prop="name"
@@ -25,21 +26,77 @@
       <el-table-column prop="createTime" label="创建时间" :sortable="true">
       </el-table-column>
       <el-table-column align="right">
+        <template slot-scope='' slot='header'>
+          <el-button type="primary" round size='mini' @click="addorder">新增</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column align="right">
         <!-- 操作按钮 -->
         <!-- <template slot="header" slot-scope="scope">
           <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
         </template> -->
-        <template>
-          <el-button size="mini">修改</el-button>
-          <el-button size="mini" type="danger">删除</el-button>
+        <template v-slot="scope">
+          <el-button size="mini" @click.native="handleEdit(scope.row)"
+            >修改</el-button
+          >
+          <el-button
+            size="mini"
+            type="danger"
+            @click.native="deleteorder(scope.row)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- dialog对话框 -->
+    <!-- 修改 -->
+    <el-dialog title="数据更改" :visible.sync="dialogFormVisibleone">
+      <el-form>
+        <el-form-item label="活动名称" label-width="120" :required="true">
+          <el-input
+            class="name"
+            autocomplete="off"
+            v-model="row.name"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="ID" label-width="120" :required="true">
+          <el-input class="name" autocomplete="off" v-model="row.id"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelone">取 消</el-button>
+        <el-button type="primary" @click.native="updatelist">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 新增订货会 -->
+    <el-dialog title="新增订货" :visible.sync="dialogFormVisibletwo">
+      <el-form>
+        <el-form-item label="活动名称" label-width="120" :required="true">
+          <el-input
+            class="name"
+            autocomplete="off"
+            v-model="queryinfo.name"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="ID" label-width="120" :required="true">
+          <el-input class="name" autocomplete="off" v-model="queryinfo.id"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="canceltwo">取 消</el-button>
+        <el-button type="primary" @click="addconfirm">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-// import {  getAllOrderMeeting } from 'network/ordermeeting/ordermeeting'
+import {
+  updateOrder,
+  deletordermeeting,
+  addordermeeting
+} from "network/ordermeeting/ordermeeting";
 export default {
   name: "OrderTab",
   props: {
@@ -53,9 +110,33 @@ export default {
   data() {
     return {
       tableData: [],
-      search:''
+      search: "",
+      dialogFormVisibleone: false,
+      dialogFormVisibletwo:false,
+      // 存储当前表格行的数据
+      row: {},
+      tabrecords: [],
+      // color: "red",
+      // 请求体参数
+      queryinfo:{
+        name:'',
+        id:''
+      }
     };
   },
+  // directives:{
+  //   test:{
+  //     bind(el){
+  //       console.log(el)
+  //       console.log()
+  //       el.style.color = 'red'
+  //     },
+  //     inserted(){},
+  //     update(){},
+  //     componentUpdated(){},
+  //     unbind(){}
+  //   }
+  // },
   // 页面一创建调用该方法获取数据
   // created() {
   //   this.getorderlist();
@@ -64,26 +145,79 @@ export default {
   //   this.getsearch()
   // },
   methods: {
-    // getorderlist() {
-    //     getAllOrderMeeting().then(res =>{
-    //       this.tableData = res.data.data
-    //       console.log(res)
-    //     })
-    // },
-    // getsearch(){
-    //   let length = this.tableData.length
-    //   for(let i=0;i<length;i++){
-    //     if(this.tableData[i].name === this.search){
-    //       this.tableData.length = 0
-    //       this.tableData = this.tableData[i]
-    //     }
-    //   }
-    //   console.log(this.search)
-    //   return this.tableData
-    // }
+    // 新增
+    addorder(){
+      this.dialogFormVisibletwo = !this.dialogFormVisibletwo;
+    },
+    // 确认新增按钮
+    async addconfirm(){
+      await addordermeeting(this.queryinfo.name,this.queryinfo.id).then(res=>{
+        console.log(res)
+        // 关闭对话框
+        this.dialogFormVisibletwo = !this.dialogFormVisibletwo;
+        this.$message.success(res.data.message)
+        // 添加之后需要刷新表格
+        this.$emit("refresh");
+      })
+    },
+    // 点击修改按钮
+    handleEdit(row) {
+      console.log(row);
+      this.dialogFormVisibleone = !this.dialogFormVisibleone;
+      this.row = row;
+    },
+    // 修改对话框取消按钮
+    cancelone(){
+      this.$message.info('已取消修改')
+      this.dialogFormVisibleone = !this.dialogFormVisibleone;
+    },
+    // 新增订货取消按钮
+    canceltwo(){
+      this.$message.info('已取消新增订货')
+      this.dialogFormVisibletwo = !this.dialogFormVisibletwo
+    },
+    // 修改对话框确定按钮
+    async updatelist() {
+      //  发送请求
+      await updateOrder(this.row).then((res) => {
+        this.$message.success(res.data.message);
+      });
+      this.dialogFormVisibleone = !this.dialogFormVisibleone;
+    },
+    // 删除订单按钮
+    deleteorder(row) {
+      // 发送删除请求,先确认是否删除
+      this.$confirm("确认删除?", "警告", {
+        type: "warning",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+      })
+        .then(() => {
+          // 点击确认之后发送删除请求
+          deletordermeeting(row.id).then((res) => {
+            this.$message.success(res.data.message);
+            // 发射事件刷新表格数据
+            this.$emit("refresh");
+          });
+        })
+        .catch(() => {
+          this.$message.info("已取消删除");
+        });
+    },
   },
 };
 </script>
 
 <style>
+.name{
+  width:40%;
+}
+/* 对话框 */
+.el-dialog{
+  width:27%;
+}
+/* label */
+.el-form-item__label{
+  width:79px;
+}
 </style>

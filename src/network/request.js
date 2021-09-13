@@ -6,10 +6,7 @@ export function request(config) {
     let instance = axios.create({
         baseURL: 'http://192.168.100.72:8769/outsource',
         // baseURL:'/api',
-        timeout: 1000 * 6,
-        // headers:{
-        //     'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'
-        // }
+        timeout: 1000 * 6
     })
     // 拦截请求
     instance.interceptors.request.use(config => {
@@ -38,10 +35,10 @@ export function request(config) {
                     // 然后跳转到登录页面
                     window.location.href='/login'
                 })
-                
-                break
-            case 500:
-                
+            break
+        }
+        if(response.data.status === 500){
+            this.$message.error(response.data.error)
         }
         // 拦截之后需要return 响应
         return response

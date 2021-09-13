@@ -6,6 +6,7 @@ import {
     MenuItem,
     MenuItemGroup,
     Input,
+    Dialog,
     // InputNumber,
     Button,
     // ButtonGroup,
@@ -19,7 +20,7 @@ import {
     // Alert,
     // Slider,
     // Icon,
-    // Upload,
+    Upload,
     // Progress,
     // Collapse,
     // CollapseItem,
@@ -42,6 +43,7 @@ const element = {
         // Vue.use(InputNumber);
         // Vue.use(Option);
         Vue.use(Button);
+        Vue.use(Dialog);
         // Vue.use(ButtonGroup);
         Vue.use(Table);
         Vue.use(TableColumn);
@@ -53,7 +55,7 @@ const element = {
         // Vue.use(Alert);
         // Vue.use(Slider);
         // Vue.use(Icon);
-        // Vue.use(Upload);
+        Vue.use(Upload);
         // Vue.use(Progress);
         // Vue.use(Collapse);
         // Vue.use(CollapseItem);
