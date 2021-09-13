@@ -15,6 +15,7 @@ module.exports = {
             .set('store', resolve('src/store'))
             .set('assets', resolve('src/assets'))
             .set('plugin',resolve('src/plugin'))
+            .set('utils',resolve('src/utils'))
     },
     devServer: {
         // 配置代理

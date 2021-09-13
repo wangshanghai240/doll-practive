@@ -29,6 +29,7 @@
 <script>
 import { getordermeeting } from "network/ordermeeting/ordermeeting";
 import { exportexcel, uploaddata } from "network/ordershop/ordershop";
+import { formatTime } from 'utils/time'
 
 export default {
   name: "OrderSearch",
@@ -104,20 +105,16 @@ export default {
     async exportexcel() {
       await exportexcel(this.ordershopdata).then((res) => {
         console.log(res);
-        const fileName = res.headers["content-disposition"].replace(
-          /\w+;filename=(.*)/,
-          "$1"
-        );
-        // 创建blob对象并设置文件类型
+        // 创建blob对象并设置文件MIME类型
         const blob = new Blob([res.data], { type: "application/vnd.ms-excel" });
         console.log(blob);
         // 创建对象url就不用读取文件内容到JavaScript就可以使用文件
         const blobUrl = window.URL.createObjectURL(blob);
-        // TODO暂时不知道这个代码有什么用
+        // 创建一个a标签
         const link = document.createElement("a");
         link.href = blobUrl;
-        // 自定义文件名
-        link.download = decodeURI(fileName);
+        // 自定义文件名(年月日形式)
+        link.download = formatTime()
         // 下载文件
         link.click();
         // 使用完数据最好释放与之关联的内存
@@ -132,7 +129,7 @@ export default {
       let files = params.file,
       // 创建formdata对象,方便我们将文件转化为formdata格式(二进制)
         formdata = new FormData();
-        // 将我们要上传的文件添加进formdata中
+        // 将我们要上传的文件添加进formdata对象实例中
         formdata.append("file", files);
         
         console.log(formdata.get('file'));
