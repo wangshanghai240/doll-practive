@@ -60,7 +60,6 @@ export default {
         // 发射自定义事件并传递参数
         this.$emit('records',this.records)
       })
-      
     },
     // 当前页码发生改变时的事件处理程序
     async currtchange(page){

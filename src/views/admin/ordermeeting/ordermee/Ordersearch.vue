@@ -132,7 +132,7 @@ export default {
         // 将我们要上传的文件添加进formdata对象实例中
         formdata.append("file", files);
         
-        console.log(formdata.get('file'));
+        console.log(formdata.get('file')); 
         // 发起网络请求
         await uploaddata(formdata, this.uploadexcels).then((value) => {
           this.$message.success(value.data.message)
