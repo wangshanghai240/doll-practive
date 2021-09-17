@@ -15,7 +15,7 @@
       <!-- upload -->
       <el-upload
         class="upload-demo"
-        action="ccc"
+        action
         :http-request="upload"
         :limit="1"
         :file-list="filelist"

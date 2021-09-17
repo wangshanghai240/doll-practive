@@ -21,13 +21,14 @@ import {
   getordermeeting,
   getAllOrderMeeting,
 } from "network/ordermeeting/ordermeeting";
-
+import { queryinfo } from 'mixins/queryinfo'
 import OrderSearch from "views/admin/ordermeeting/ordermee/OrderSearch.vue";
 import OrderTab from "./ordermee/OrderTab.vue";
 import Pagination from "components/common/Pagination.vue";
 
 export default {
   components: { OrderSearch, OrderTab, Pagination },
+  mixins:[queryinfo],
   name: "OrderMeeting",
   data() {
     return {
@@ -36,7 +37,7 @@ export default {
       // 存储从ordersearch组件传过来的搜索值
       search: "",
       // 请求参数字段
-      queryinfo:{},
+      // queryinfo:{},
       // 存储所有订货会数据的长度
       paginationlength:0
     };

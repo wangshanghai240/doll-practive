@@ -17,8 +17,10 @@
 
 <script>
 import { getordermeeting } from 'network/ordermeeting/ordermeeting'
+import { queryinfo } from 'mixins/queryinfo'
 export default {
   name: "Pagination",
+  mixins:[queryinfo],
   // 接收来自父组件的值
   props: {
     orderlist: {
@@ -29,17 +31,17 @@ export default {
   data() {
     return {
       // 需要作为请求的参数
-      queryinfo:{
-        query:{
-          end:'',
-          start:'',
-          name:''
-        },
-        // 页数
-        page:1,
-        // 每页多少条数据
-        limit:10
-      },
+      // queryinfo:{
+      //   query:{
+      //     end:'',
+      //     start:'',
+      //     name:''
+      //   },
+      //   // 页数
+      //   page:1,
+      //   // 每页多少条数据
+      //   limit:10
+      // },
       pagesizes:[10,20,30,40],
       // 存储每页条数数据
       records:[]
