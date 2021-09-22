@@ -92,10 +92,11 @@ export default {
           this.list.push(item);
         }
         this.orderlist = this.list;
+        
       });
-
+      this.list = []
       console.log(this.orderlist);
-      if (this.list !== []) {
+      if (this.orderlist.length !== 0) {
         this.$message.success("查询成功");
       } else {
         this.$message.warning("数据不存在，请重试");
@@ -122,6 +123,7 @@ export default {
     resetlist(resetlist) {
       this.orderlist = [];
       this.orderlist = resetlist;
+      console.log(this.orderlist)
     },
     // ccc() {
     //   this.
