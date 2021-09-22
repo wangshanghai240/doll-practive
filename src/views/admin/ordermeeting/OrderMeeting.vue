@@ -4,14 +4,18 @@
       ref="ordsea"
       @searchdata="searchdata"
       @resetlist="resetlist"
-      :queryinfos='queryinfo'
+      :queryinfos="queryinfo"
     ></order-search>
-    <order-tab :tableDatas="orderlist" ref="ordertab" @refresh='refreshtable'></order-tab>
+    <order-tab
+      :tableDatas="orderlist"
+      ref="ordertab"
+      @refresh="refreshtable"
+    ></order-tab>
     <pagination
       :orderlist="paginationlength"
       ref="pagination"
       @records="records"
-      @getpagelimit='getpagelimit'
+      @getpagelimit="getpagelimit"
     ></pagination>
   </div>
 </template>
@@ -21,25 +25,27 @@ import {
   getordermeeting,
   getAllOrderMeeting,
 } from "network/ordermeeting/ordermeeting";
-import { queryinfo } from 'mixins/queryinfo'
+import { queryinfo } from "mixins/queryinfo";
 import OrderSearch from "views/admin/ordermeeting/ordermee/OrderSearch.vue";
 import OrderTab from "./ordermee/OrderTab.vue";
 import Pagination from "components/common/Pagination.vue";
 
 export default {
   components: { OrderSearch, OrderTab, Pagination },
-  mixins:[queryinfo],
+  mixins: [queryinfo],
   name: "OrderMeeting",
   data() {
     return {
       // 存储订货列表
       orderlist: [],
+      // 存储模糊查询结果
+      list: [],
       // 存储从ordersearch组件传过来的搜索值
       search: "",
       // 请求参数字段
       // queryinfo:{},
       // 存储所有订货会数据的长度
-      paginationlength:0
+      paginationlength: 0,
     };
   },
   // 组件挂载之后就获取订货数据
@@ -49,7 +55,7 @@ export default {
   methods: {
     async ordermeeting() {
       // 发送网络请求获取所有订货list
-        getAllOrderMeeting()
+      getAllOrderMeeting()
         .then((res) => {
           console.log(res);
           // 将数据长度保存在paginationlength
@@ -61,13 +67,17 @@ export default {
             message: err,
           });
         });
-        // 对订货列表查询
-      await getordermeeting(this.queryinfo,this.queryinfo.query).then(res =>{
-        this.orderlist = res.data.data.records
-      },err=>{
-        this.$message.warning(err.data.message)
-      })
+      // 对订货列表查询
+      await getordermeeting(this.queryinfo, this.queryinfo.query).then(
+        (res) => {
+          this.orderlist = res.data.data.records;
+        },
+        (err) => {
+          this.$message.warning(err.data.message);
+        }
+      );
     },
+    // 模糊查询功能
     searchdata(search) {
       // this.orderlist.map((item)=>{
       //   if(item.name.indexOf(search) != -1){
@@ -75,7 +85,21 @@ export default {
       //   }
       // })
       // 方式一：
-      this.orderlist = this.orderlist.filter((item) => item.name === search);
+      this.orderlist.map((item) => {
+        // 将搜索匹配到的所有结果
+        if (item.name.indexOf(search) > -1) {
+          // push到list中
+          this.list.push(item);
+        }
+        this.orderlist = this.list;
+      });
+
+      console.log(this.orderlist);
+      if (this.list !== []) {
+        this.$message.success("查询成功");
+      } else {
+        this.$message.warning("数据不存在，请重试");
+      }
 
       // this.search = ''
       // 方式二
@@ -96,6 +120,7 @@ export default {
     },
     // 点击重置按钮获取所有数据
     resetlist(resetlist) {
+      this.orderlist = [];
       this.orderlist = resetlist;
     },
     // ccc() {
@@ -105,17 +130,19 @@ export default {
       this.orderlist = records;
     },
     // 传递分页中的请求参数queryinfo
-    getpagelimit(queryinfo){
-      this.queryinfo = queryinfo
+    getpagelimit(queryinfo) {
+      this.queryinfo = queryinfo;
     },
     // 删除表格信息刷新表格
-    async refreshtable(){
-      await getordermeeting(this.queryinfo,this.queryinfo.queryinfo).then(res =>{
-        this.orderlist = res.data.data.records
-        // 删除数据之后order总数发生变化
-        this.ordermeeting()
-      })
-    }
+    async refreshtable() {
+      await getordermeeting(this.queryinfo, this.queryinfo.queryinfo).then(
+        (res) => {
+          this.orderlist = res.data.data.records;
+          // 删除数据之后order总数发生变化
+          this.ordermeeting();
+        }
+      );
+    },
   },
 };
 </script>

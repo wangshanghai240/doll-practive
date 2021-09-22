@@ -10,7 +10,7 @@ export function deepClone(origin,target){
             if(typeof origin[key] === 'object' && origin[key] !== null){
                 // 若是对象就给一个空对象，是数组就给一个空数组即可
                 tar[key] = arrType.call(origin[key]) === '[object Array]' ? [] : {}
-                // 然后递归一遍
+                // 然后递归一遍,这里用arguments的callee属性指向该函数本身以达到解耦的目的
                 arguments.callee(orgin[key],target[key])
             }
             // 说明是基本数据类型可直接赋值
