@@ -5,8 +5,8 @@ export function debounce(func,wait,immediaite){
     return function(){
         var _self = this,
             arg = arguments
-        if(t){
-            clearTimeout(t)
+        if(time){
+            clearTimeout(time)
         }
         if(immediaite){
             var exec = !time
@@ -21,6 +21,23 @@ export function debounce(func,wait,immediaite){
             time = setTimeout(function(){
                 func.apply(this,arg)
             },wait)
+        }
+    }
+}
+// 函数节流
+export function throttle(func,delay){
+    let t = null,
+        _self = this,
+        argu = arguments
+    return function(){
+        if(!t){
+            let exec = !t
+            if(exec){
+                t = setTimeout(function(){
+                    func.apply(_self,argu)
+                    t = null
+                },delay)
+            }
         }
     }
 }
