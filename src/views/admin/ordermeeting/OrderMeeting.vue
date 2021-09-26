@@ -22,7 +22,7 @@ import {
   getAllOrderMeeting,
 } from "network/ordermeeting/ordermeeting";
 
-import OrderSearch from "views/admin/ordermeeting/ordermee/OrderSearch.vue";
+import OrderSearch from "views/admin/ordermeeting/ordermee/Ordersearch.vue";
 import OrderTab from "./ordermee/OrderTab.vue";
 import Pagination from "components/common/Pagination.vue";
 
