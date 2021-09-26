@@ -16,6 +16,7 @@ module.exports = {
             .set('assets', resolve('src/assets'))
             .set('plugin',resolve('src/plugin'))
             .set('utils',resolve('src/utils'))
+            .set('mixins',resolve('src/mixins'))
     },
     devServer: {
         // 配置代理

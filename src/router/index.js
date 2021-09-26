@@ -36,52 +36,66 @@ let routes = [
         path: '/admin',
         component: Admin,
         name:'首页',
-        children: [{
+        children: [
+            {
                 path: 'dashboard',
-                component: Dashboard
+                component: Dashboard,
+                name:'首页',
+                meta:{icon:'el-icon-s-home'}
             },
             {
                 path: '',
                 redirect: 'dashboard',
+                name:'首页',
                 meta:{
-                    hidden:true
+                    hidden:true,
+                    icon:'el-icon-s-home'
                 }
             },
             {
                 path: 'fabric',
                 component: Fabric,
                 name: '面料',
+                meta:{icon:'el-icon-eleme'},
                 children: [{
                         path: 'reqlist',
                         component: ReqList,
-                        name: '需求列表'
+                        name: '需求列表',
+                        meta:{icon:'el-icon-tickets'}
                     },
                     {
                         path: 'shoplist',
                         component: ShopList,
                         name: '采购列表',
+                        meta:{icon:'el-icon-printer'}
                     }
                 ]
             },
             {
                 path: 'ordermeeting',
                 component: OrderMeeting,
-                name: '订货会'
+                name: '订货会',
+                meta:{
+                    icon:'el-icon-s-goods'
+                }
             },
             {
                 path: 'ordershop',
                 component: OrderShop,
-                name: '商品列表'
+                name: '商品列表',
+                meta:{icon:'el-icon-set-up'}
             },
             {
                 path: 'user',
                 component: User,
-                name: '用户列表'
+                name: '用户列表',
+                meta:{icon:'el-icon-discount'}
             },
             {
                 path: 'syslog',
                 component: SysLog,
-                name: '系统日志'
+                name: '系统日志',
+                meta:{icon:'el-icon-school'}
             }
         ],
         meta: {
@@ -128,15 +142,15 @@ VueRouter.prototype.push = function push(location) {
 //     }
 // })
 // 登录验证
-// router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
     // to:将要达到的路径
     // from:离开的路径
     // 如果访问/login直接放行
-    // console.log(to.matched)
-    // if (to.path == '/login') return next()
+    console.log(to.matched)
+    if (to.path == '/login') return next()
     // 如果sessionStorage没有token，则重定向到登录页
-//     if (!sessionStorage.getItem('token')) return next('/login')
-//     next()
-// })
+    if (!sessionStorage.getItem('token')) return next('/login')
+    next()
+})
 // 导出路由对象，暴露接口
 export default router
