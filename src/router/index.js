@@ -36,52 +36,66 @@ let routes = [
         path: '/admin',
         component: Admin,
         name:'首页',
-        children: [{
+        children: [
+            {
                 path: 'dashboard',
-                component: Dashboard
+                component: Dashboard,
+                name:'首页',
+                meta:{icon:'el-icon-s-home'}
             },
             {
                 path: '',
                 redirect: 'dashboard',
+                name:'首页',
                 meta:{
-                    hidden:true
+                    hidden:true,
+                    icon:'el-icon-s-home'
                 }
             },
             {
                 path: 'fabric',
                 component: Fabric,
                 name: '面料',
+                meta:{icon:'el-icon-eleme'},
                 children: [{
                         path: 'reqlist',
                         component: ReqList,
-                        name: '需求列表'
+                        name: '需求列表',
+                        meta:{icon:'el-icon-tickets'}
                     },
                     {
                         path: 'shoplist',
                         component: ShopList,
                         name: '采购列表',
+                        meta:{icon:'el-icon-printer'}
                     }
                 ]
             },
             {
                 path: 'ordermeeting',
                 component: OrderMeeting,
-                name: '订货会'
+                name: '订货会',
+                meta:{
+                    icon:'el-icon-s-goods'
+                }
             },
             {
                 path: 'ordershop',
                 component: OrderShop,
-                name: '商品列表'
+                name: '商品列表',
+                meta:{icon:'el-icon-set-up'}
             },
             {
                 path: 'user',
                 component: User,
-                name: '用户列表'
+                name: '用户列表',
+                meta:{icon:'el-icon-discount'}
             },
             {
                 path: 'syslog',
                 component: SysLog,
-                name: '系统日志'
+                name: '系统日志',
+                meta:{icon:'el-icon-school'}
             }
         ],
         meta: {
