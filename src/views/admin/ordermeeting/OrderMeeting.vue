@@ -25,13 +25,8 @@ import {
   getordermeeting,
   getAllOrderMeeting,
 } from "network/ordermeeting/ordermeeting";
-<<<<<<< HEAD
-
-import OrderSearch from "views/admin/ordermeeting/ordermee/Ordersearch.vue";
-=======
 import { queryinfo } from "mixins/queryinfo";
 import OrderSearch from "views/admin/ordermeeting/ordermee/OrderSearch.vue";
->>>>>>> refs/remotes/origin/master
 import OrderTab from "./ordermee/OrderTab.vue";
 import Pagination from "components/common/Pagination.vue";
 

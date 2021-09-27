@@ -19,12 +19,12 @@
             <span>|||</span>
           </div>
           <!-- 导航菜单 -->
-          <nav-menu>
-            <menu-item>
+          <nav-menu @iscollpase='iscollapse'>
+            <menu-item v-for="(item, index) in routepat" :key="index">
               <el-submenu
                 v-if="routepat.children && routepat.children.length > 0"
                 :index="routepat.path"
-                slot='submenu'
+                slot="submenu"
               >
                 <template slot="title">
                   <i :class="routepat.meta.icon"></i>
@@ -34,7 +34,6 @@
                   v-for="(item, index) in seroutepat"
                   :key="index"
                   :index="item.path"
-                  slot='menuitem'
                 >
                   <i :class="item.meta.icon"></i>
                   <span>{{ item.name }}</span>
@@ -44,6 +43,7 @@
               <el-menu-item
                 v-else-if="routepat.path ? routepat.path : false"
                 :index="routepat.path"
+                slot="menuitem"
               >
                 <i :class="routepat.meta.icon"></i>
                 <span>{{ routepat.name }}</span>
@@ -125,19 +125,19 @@
 import Logo from "components/content/Logo.vue";
 import BreadCrumb from "components/content/BreadCrumb.vue";
 import Logout from "components/content/Logout.vue";
-import NavMenu from 'views/admin/NavMenu.vue'
+import NavMenu from "views/admin/NavMenu.vue";
 // import MutilMenuItem from 'components/content/MutilMenuItem.vue'
 // import MenuItem from 'components/content/MenuItem.vue'
 
-import { getuserinfo } from 'network/user/user'
-import MenuItem from 'views/admin/MenuItem.vue';
+import { getuserinfo } from "network/user/user";
+import MenuItem from "views/admin/MenuItem.vue";
 export default {
   components: {
     Logo,
     BreadCrumb,
     Logout,
     NavMenu,
-    MenuItem
+    MenuItem,
   },
   name: "Admin",
   data() {
@@ -145,21 +145,41 @@ export default {
       // sidebar的显隐
       iscollapse: false,
       currentindex: 0,
+      secroute: [],
       // 保存路由列表
-      route:[]
+      route: [],
     };
+  },
+  created() {
+    this.secroute = this.routepaat;
+  },
+  computed: {
+    //获取路由列表
+    routepat() {
+      return this.$router.options.routes[2].children;
+    },
+    // 二级路由列表
+    seroutepat() {
+      return this.routepat[2].children;
+    },
+    //获取路径
+    path() {
+      return this.routepat.path;
+    },
   },
   methods: {
     // 点击隐藏和显示sidebar
     togglecollapse() {
       this.iscollapse = !this.iscollapse;
+      console.log(this.routepat, this.seroutepat);
+      this.$emit('iscollapse',this.iscollapse)
     },
     // 这个暂时没用
-    getuserinfo(){
-      getuserinfo().then(res =>{
-        console.log(res)
-      })
-    }
+    getuserinfo() {
+      getuserinfo().then((res) => {
+        console.log(res);
+      });
+    },
   },
 };
 </script>

@@ -8,24 +8,24 @@
 <script>
 export default {
   name: "MenuItem",
-  props: {
-    routepat: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
-  },
-  data() {
-    return {
-      secroute: this.routepat,
-    };
-  },
-  computed: {
-    seroutepat() {
-      return this.secroute.children;
-    },
-  },
+  // props: {
+  //   routepat: {
+  //     type: Object,
+  //     default() {
+  //       return {};
+  //     },
+  //   },
+  // },
+  // data() {
+  //   return {
+  //     secroute: this.routepat,
+  //   };
+  // },
+  // computed: {
+  //   seroutepat() {
+  //     return this.secroute.children;
+  //   },
+  // },
 };
 </script>
 
