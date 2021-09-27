@@ -8,7 +8,8 @@ Vue.use(Vuex)
 let store = new Vuex.Store({
     // 判断是否有token
     state: {
-        token: ''
+        token: '',
+        iscollapse:false
     },
     mutations: {
         // 设置传递过来的token放入state的token变量中
@@ -19,6 +20,10 @@ let store = new Vuex.Store({
         delToken(state) {
             state.token = ''
             sessionStorage.removeItem('token')
+        },
+        changecoll(state,payload){
+            state.iscollapse = payload.isco
+            console.log(state.iscollapse)
         }
     },
     actions: {
@@ -27,6 +32,11 @@ let store = new Vuex.Store({
             setTimeout(() => {
                 content.commit('delToken')
             }, 100);
+        },
+        changecollapse(context,payload){
+            setTimeout(()=>{
+                context.commit('changecoll',payload)
+            },100)
         }
     },
     getters:{

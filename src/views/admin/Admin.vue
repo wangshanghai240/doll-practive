@@ -13,42 +13,14 @@
       <!-- 布局容器 -->
       <el-container>
         <!-- 侧边栏 -->
-        <el-aside :width="iscollapse ? '64px' : '200px'">
+        <el-aside :width="iscollapse ? '64px' : '200px'" :class="{show:iscollapse}">
           <!-- 折叠按钮 -->
           <div class="toggle" @click="togglecollapse">
             <span>|||</span>
           </div>
           <!-- 导航菜单 -->
-          <nav-menu>
-            <menu-item>
-              <el-submenu
-                v-if="routepat.children && routepat.children.length > 0"
-                :index="routepat.path"
-                slot='submenu'
-              >
-                <template slot="title">
-                  <i :class="routepat.meta.icon"></i>
-                  <span>{{ routepat.name }}</span>
-                </template>
-                <el-menu-item
-                  v-for="(item, index) in seroutepat"
-                  :key="index"
-                  :index="item.path"
-                  slot='menuitem'
-                >
-                  <i :class="item.meta.icon"></i>
-                  <span>{{ item.name }}</span>
-                </el-menu-item>
-              </el-submenu>
-              <!-- 只有一级菜单的 -->
-              <el-menu-item
-                v-else-if="routepat.path ? routepat.path : false"
-                :index="routepat.path"
-              >
-                <i :class="routepat.meta.icon"></i>
-                <span>{{ routepat.name }}</span>
-              </el-menu-item>
-            </menu-item>
+          <nav-menu ref='navmenu'>
+            <menu-item v-for="(item, index) in routepat" :key="index" :routepat="item" ref='menuitem'></menu-item>
           </nav-menu>
           <!-- <el-menu
             class="el-menu-vertical-demo"
@@ -149,10 +121,21 @@ export default {
       route:[]
     };
   },
+  computed:{
+    //   获取路由列表
+    routepat() {
+      return this.$router.options.routes[2].children;
+    }
+  },
   methods: {
     // 点击隐藏和显示sidebar
     togglecollapse() {
       this.iscollapse = !this.iscollapse;
+      this.$store.dispatch('changecollapse',{isco:this.iscollapse})
+      this.$refs.navmenu.iscollapse = this.iscollapse
+      console.log(this.$refs.navmenu.iscollapse)
+      this.$refs.menuitem.iscollapse = this.iscollapse
+      console.log(this.$refs.menuitem.iscollapse)
     },
     // 这个暂时没用
     getuserinfo(){
@@ -164,16 +147,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-menu-vertical-demo {
   background: #fff;
   color: rgb(0, 0, 0);
   border: none;
-}
-.el-menu-vertical-demo img {
-  vertical-align: center;
-  width: 20px;
-  margin-right: 12px;
 }
 .admin .header {
   position: relative;
@@ -194,10 +172,7 @@ export default {
   color: #c2c2c2;
   line-height: 22px;
 }
-.el-menu-item img {
-  width: 20px;
-}
-.isactive {
-  color: #e6187f;
+.admin .show::-webkit-scrollbar{
+  display:none;
 }
 </style>
