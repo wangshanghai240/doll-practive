@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="menu"> -->
     <el-menu
       class="el-menu-vertical-demo"
       active-text-color="#1860e6"
@@ -12,7 +11,7 @@
       <!-- <menu-item v-for="(item, index) in routepat" :key="index" :routepat="item"></menu-item> -->
       <slot></slot>
     </el-menu>
-  <!-- </div> -->
+    
 </template>
 
 <script>
@@ -25,8 +24,12 @@ export default {
     return {
       // 保存路由列表
       route: this.routepat,
+      // 是否折叠面板
       iscollapse:false
     };
+  },
+  created(){
+    
   },
   computed: {
     //   获取路由列表
@@ -37,8 +40,11 @@ export default {
     path(){
         return this.routepat.path
     }
+  },
+  methods:{
+    
   }
-};
+}
 </script>
 
 <style>
