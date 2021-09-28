@@ -97,19 +97,19 @@
 import Logo from "components/content/Logo.vue";
 import BreadCrumb from "components/content/BreadCrumb.vue";
 import Logout from "components/content/Logout.vue";
-import NavMenu from 'views/admin/NavMenu.vue'
+import NavMenu from "views/admin/NavMenu.vue";
 // import MutilMenuItem from 'components/content/MutilMenuItem.vue'
 // import MenuItem from 'components/content/MenuItem.vue'
 
-import { getuserinfo } from 'network/user/user'
-import MenuItem from 'views/admin/MenuItem.vue';
+import { getuserinfo } from "network/user/user";
+import MenuItem from "views/admin/MenuItem.vue";
 export default {
   components: {
     Logo,
     BreadCrumb,
     Logout,
     NavMenu,
-    MenuItem
+    MenuItem,
   },
   name: "Admin",
   data() {
@@ -117,8 +117,9 @@ export default {
       // sidebar的显隐
       iscollapse: false,
       currentindex: 0,
+      secroute: [],
       // 保存路由列表
-      route:[]
+      route: [],
     };
   },
   computed:{
@@ -138,11 +139,11 @@ export default {
       console.log(this.$refs.menuitem.iscollapse)
     },
     // 这个暂时没用
-    getuserinfo(){
-      getuserinfo().then(res =>{
-        console.log(res)
-      })
-    }
+    getuserinfo() {
+      getuserinfo().then((res) => {
+        console.log(res);
+      });
+    },
   },
 };
 </script>

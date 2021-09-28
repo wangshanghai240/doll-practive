@@ -142,15 +142,15 @@ VueRouter.prototype.push = function push(location) {
 //     }
 // })
 // 登录验证
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
     // to:将要达到的路径
     // from:离开的路径
     // 如果访问/login直接放行
-    console.log(to.matched)
-    if (to.path == '/login') return next()
+    // console.log(to.matched)
+    // if (to.path == '/login') return next()
     // 如果sessionStorage没有token，则重定向到登录页
-    if (!sessionStorage.getItem('token')) return next('/login')
-    next()
-})
+//     if (!sessionStorage.getItem('token')) return next('/login')
+//     next()
+// })
 // 导出路由对象，暴露接口
 export default router
