@@ -1,4 +1,5 @@
 <template>
+<!-- 拥有二级菜单的 -->
   <div class="menitem" :class="{ccc:true}">
     <el-submenu
       v-if="routepat.children && routepat.children.length > 0"
@@ -6,7 +7,7 @@
     >
       <template slot="title">
         <i :class="routepat.meta.icon"></i>
-        <span v-if='!iscollapse'>{{ routepat.name }}</span>
+        <span v-show='!iscollapse'>{{ routepat.name }}</span>
       </template>
       <el-menu-item
         v-for="(item, index) in seroutepat"
@@ -14,7 +15,7 @@
         :index="item.path"
       >
         <i :class="item.meta.icon"></i>
-        <span v-if='!iscollapse'>{{ item.name }}</span>
+        <span>{{ item.name }}</span>
       </el-menu-item>
     </el-submenu>
     <!-- 只有一级菜单的 -->
@@ -23,12 +24,13 @@
       :index="routepat.path"
     >
       <i :class="routepat.meta.icon"></i>
-      <span v-if='!iscollapse' :class='{show:iscollapse}'>{{ routepat.name }}</span>
+      <span v-show='!iscollapse' :class='{show:iscollapse}'>{{ routepat.name }}</span>
     </el-menu-item>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'utils/mapVuex.js'
 export default {
   name: "MenuItem",
   props: {
@@ -41,13 +43,19 @@ export default {
   },
   data() {
     return {
-      iscollapse:false
+      // iscollapse:false
     };
   },
   computed: {
+    // 数组形式
+    ...mapState(['iscollapse']),
+    // 对象形式
+    ...mapState({
+      iscollapse:'iscollapse'
+    }),
     seroutepat() {
-      return this.routepat.children;
-    },
+          return this.routepat.children;
+        }
   },
   watch:{
     iscollapse:{
@@ -57,7 +65,22 @@ export default {
         console.log(nw)
       }
     }
-  }
+  },
+  methods:{
+    // 对象形式
+    ...mapMutations({
+      settoken:'setToken',
+      deltoken:'delToken'
+    }),
+    // 数组形式
+    ...mapMutations(['setToken','delToken']),
+    // 在方法中使用vuex中的方法
+    // clickhere(id){
+      // 因为上面已经将vuex中的方法映射到methods中
+      // 因此可以在开发者定义的方法中直接使用，其中的参数就是负载
+      // 相当于this.$store.commit('setToken',id)
+      // this.setToken(id)
+    }
 };
 </script>
 
