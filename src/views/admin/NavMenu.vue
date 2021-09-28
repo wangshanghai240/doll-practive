@@ -11,11 +11,11 @@
       <!-- <menu-item v-for="(item, index) in routepat" :key="index" :routepat="item"></menu-item> -->
       <slot></slot>
     </el-menu>
-    
 </template>
 
 <script>
 // import MenuItem from "./MenuItem.vue";
+import { mapState } from 'utils/mapVuex.js'
 export default {
   name: "Menu",
   components: {
@@ -23,23 +23,25 @@ export default {
   data() {
     return {
       // 保存路由列表
-      route: this.routepat,
+      route: [],
       // 是否折叠面板
-      iscollapse:false
+      // iscollapse:false
     };
   },
   created(){
-    
+    this.route = this.routepat
+    console.log(this.route)
   },
   computed: {
     //   获取路由列表
     routepat() {
-      return this.$router.options.routes[2].children;
+        return this.$router.options.routes[2].children
     },
     // 获取路径
     path(){
         return this.routepat.path
-    }
+    },
+    ...mapState(['iscollapse'])
   },
   methods:{
     

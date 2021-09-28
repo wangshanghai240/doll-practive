@@ -103,8 +103,7 @@ import MenuItem from "views/admin/MenuItem.vue";
 // import MenuItem from 'components/content/MenuItem.vue'
 
 import { getuserinfo } from "network/user/user";
-import { mapActions } from 'utils/map.js'
-
+import { mapActions } from 'utils/mapVuex.js'
 export default {
   components: {
     Logo,
@@ -131,15 +130,17 @@ export default {
     }
   },
   methods: {
+    // 将vuex中的方法映射到该组件methods中
+    ...mapActions({changeiscollapse:'changecollapse'}),
     // 点击隐藏和显示sidebar
     togglecollapse() {
       this.iscollapse = !this.iscollapse;
+      this.changeiscollapse({isco:this.iscollapse})
       // this.$store.dispatch('changecollapse',{isco:this.iscollapse})
       // this.$refs.navmenu.iscollapse = this.iscollapse
-      console.log(this.$refs.navmenu.iscollapse)
+      // console.log(this.$refs.navmenu.iscollapse)
       // this.$refs.menuitem.iscollapse = this.iscollapse
-      console.log(this.$refs.menuitem.iscollapse)
-      ...mapActions(['changecollapse'])
+      // console.log(this.$refs.menuitem.iscollapse)
     },
     
     // 这个暂时没用
