@@ -1,7 +1,7 @@
 // 深克隆
 export function deepClone(origin,target){
     let tar = target || {},
-        arrType = Object.prototype.toString
+        arrType = Array.prototype.toString
     // 遍历源对象属性，用Object.keys()也可以
     for(let key in origin){
         // 判断是不是实例上的属性而不是prototype上的属性

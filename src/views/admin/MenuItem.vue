@@ -62,10 +62,4 @@ export default {
 </script>
 
 <style>
-.menitem i {
-  /* margin:0 10px; */
-}
-.menitem .el-menu-item i {
-  /* margin-right: 10px; */
-}
 </style>
