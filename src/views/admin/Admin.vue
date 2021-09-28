@@ -98,11 +98,13 @@ import Logo from "components/content/Logo.vue";
 import BreadCrumb from "components/content/BreadCrumb.vue";
 import Logout from "components/content/Logout.vue";
 import NavMenu from "views/admin/NavMenu.vue";
+import MenuItem from "views/admin/MenuItem.vue";
 // import MutilMenuItem from 'components/content/MutilMenuItem.vue'
 // import MenuItem from 'components/content/MenuItem.vue'
 
 import { getuserinfo } from "network/user/user";
-import MenuItem from "views/admin/MenuItem.vue";
+import { mapActions } from 'utils/map.js'
+
 export default {
   components: {
     Logo,
@@ -132,12 +134,14 @@ export default {
     // 点击隐藏和显示sidebar
     togglecollapse() {
       this.iscollapse = !this.iscollapse;
-      this.$store.dispatch('changecollapse',{isco:this.iscollapse})
-      this.$refs.navmenu.iscollapse = this.iscollapse
+      // this.$store.dispatch('changecollapse',{isco:this.iscollapse})
+      // this.$refs.navmenu.iscollapse = this.iscollapse
       console.log(this.$refs.navmenu.iscollapse)
-      this.$refs.menuitem.iscollapse = this.iscollapse
+      // this.$refs.menuitem.iscollapse = this.iscollapse
       console.log(this.$refs.menuitem.iscollapse)
+      ...mapActions(['changecollapse'])
     },
+    
     // 这个暂时没用
     getuserinfo() {
       getuserinfo().then((res) => {

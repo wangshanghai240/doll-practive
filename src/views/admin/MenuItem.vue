@@ -6,7 +6,7 @@
     >
       <template slot="title">
         <i :class="routepat.meta.icon"></i>
-        <span v-if='!iscollapse'>{{ routepat.name }}</span>
+        <span v-if='isco ? !isco : false'>{{ routepat.name }}</span>
       </template>
       <el-menu-item
         v-for="(item, index) in seroutepat"
@@ -14,7 +14,7 @@
         :index="item.path"
       >
         <i :class="item.meta.icon"></i>
-        <span v-if='!iscollapse'>{{ item.name }}</span>
+        <span v-if='isco ? !isco : false'>{{ item.name }}</span>
       </el-menu-item>
     </el-submenu>
     <!-- 只有一级菜单的 -->
@@ -23,12 +23,13 @@
       :index="routepat.path"
     >
       <i :class="routepat.meta.icon"></i>
-      <span v-if='!iscollapse' :class='{show:iscollapse}'>{{ routepat.name }}</span>
+      <span v-if='isco ? !isco : false' :class='{show:iscollapse}'>{{ routepat.name }}</span>
     </el-menu-item>
   </div>
 </template>
 
 <script>
+import { mapState } from 'utils/map.js'
 export default {
   name: "MenuItem",
   props: {
@@ -41,13 +42,14 @@ export default {
   },
   data() {
     return {
-      iscollapse:false
+      // iscollapse:false
     };
   },
   computed: {
     seroutepat() {
       return this.routepat.children;
     },
+    ...mapState({isco:'iscollapse'})
   },
   watch:{
     iscollapse:{
