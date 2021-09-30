@@ -1,0 +1,1 @@
+export { mapState, mapActions, mapGetters, mapMutations } from 'vuex'

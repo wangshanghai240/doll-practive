@@ -152,6 +152,7 @@ export default {
       // this.$refs.menuitem.iscollapse = this.iscollapse
       // console.log(this.$refs.menuitem.iscollapse)
     },
+    
     // 这个暂时没用
     getuserinfo() {
       getuserinfo().then((res) => {
