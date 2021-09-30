@@ -39,7 +39,7 @@ export default {
     },
     // 获取路径
     path(){
-        return this.routepat.path
+        return this.route.path
     },
     ...mapState(['iscollapse'])
   },

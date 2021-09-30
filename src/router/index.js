@@ -46,7 +46,7 @@ let routes = [
             {
                 path: '',
                 redirect: 'dashboard',
-                name:'首页',
+                // name:'首页',
                 meta:{
                     hidden:true,
                     icon:'el-icon-s-home'

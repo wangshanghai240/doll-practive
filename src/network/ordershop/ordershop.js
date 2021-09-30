@@ -14,7 +14,7 @@ export function exportexcel(data) {
     })
 }
 // 导入(upload)商品数据
-export function uploaddata(source, source1) {
+export function uploaddata(source, source1, uploadProgress) {
     return request({
         url: '/eshopOrMeetingGoods/upload/import',
         method: 'post',
@@ -26,6 +26,7 @@ export function uploaddata(source, source1) {
         // url后面的参数
         params: {
             ...source1
-        }
+        },
+        uploadProgress
     })
 }

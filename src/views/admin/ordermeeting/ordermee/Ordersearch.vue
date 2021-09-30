@@ -17,11 +17,17 @@
         class="upload-demo"
         action
         :http-request="upload"
-        :limit="1"
+        :limit="10"
         :file-list="filelist"
       >
         <el-button size="small" type="primary">商品上传</el-button>
+        <el-progress 
+        :percentage="progress" 
+        status='success' 
+        v-show='show'>
+        </el-progress>
       </el-upload>
+      
     </div>
   </div>
 </template>
@@ -29,7 +35,7 @@
 <script>
 import { getordermeeting } from "network/ordermeeting/ordermeeting";
 import { exportexcel, uploaddata } from "network/ordershop/ordershop";
-import { formatTime } from 'utils/time'
+import { formatTime } from "utils/time";
 
 export default {
   name: "OrderSearch",
@@ -46,6 +52,9 @@ export default {
       search: "",
       resetlist: [],
       queryinfo: {},
+      // 是否显示上传进度条
+      show:false,
+      progress:0,
       // 模拟数据
       ordershopdata: {
         bomUpdate: "",
@@ -114,7 +123,7 @@ export default {
         const link = document.createElement("a");
         link.href = blobUrl;
         // 自定义文件名(年月日形式)
-        link.download = formatTime()
+        link.download = formatTime();
         // 下载文件
         link.click();
         // 使用完数据最好释放与之关联的内存
@@ -126,16 +135,26 @@ export default {
       // params就是包含我们上传的参数
       console.log(params);
       console.log(params.file);
+      this.show = !this.show
       let files = params.file,
+          config = {
+            onUploadProgress: (progressevent) => {
+              this.progress = Math.floor(progressevent.loaded / progressevent.total * 100) + '%';
+            },
+          },
+      
       // 创建formdata对象,方便我们将文件转化为formdata格式(二进制)
-        formdata = new FormData();
-        // 将我们要上传的文件添加进formdata对象实例中
-        formdata.append("file", files);
-        
-        console.log(formdata.get('file')); 
-        // 发起网络请求
-        await uploaddata(formdata, this.uploadexcels).then((value) => {
-          this.$message.success(value.data.message)
+      formdata = new FormData();
+      // 将我们要上传的文件添加进formdata对象实例中
+      formdata.append("file", files);
+      // 获取formdata对象中的数据
+      console.log(formdata.get("file"));
+      // 发起网络请求
+      await uploaddata(formdata, this.uploadexcels, config).then((value) => {
+        this.$message.success(value.data.message);
+        // 清空保存上传文件的列表
+        this.filelist = [];
+        this.show = !this.show
       });
     },
   },
@@ -151,7 +170,9 @@ export default {
   width: 200px;
   margin: 0 20px 20px 10px;
 }
-.ordersearch .btn {
+.ordersearch .btn,
+.ordersearch .btn .upload-demo {
   display: inline-block;
+  margin-left: 10px;
 }
 </style>

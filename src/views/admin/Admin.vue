@@ -20,7 +20,11 @@
           </div>
           <!-- 导航菜单 -->
           <nav-menu ref='navmenu'>
-            <menu-item v-for="(item, index) in routepat" :key="index" :routepat="item" ref='menuitem'></menu-item>
+            <menu-item v-for="(item, index) of routepat" :key="index" :routepat="item" ref='menuitem' :childroute='childroute'>
+              <!-- <template #ccc='abs'>
+                {{ abs.ppx}}
+              </template> -->
+            </menu-item>
           </nav-menu>
           <!-- <el-menu
             class="el-menu-vertical-demo"
@@ -123,10 +127,16 @@ export default {
       route: [],
     };
   },
+  created(){
+    console.log(this.childroute)
+  },
   computed:{
     //   获取路由列表
     routepat() {
       return this.$router.options.routes[2].children;
+    },
+    childroute(){
+      return this.routepat.filter(item => item.children)
     }
   },
   methods: {
@@ -177,7 +187,7 @@ export default {
   color: #c2c2c2;
   line-height: 22px;
 }
-.admin .show::-webkit-scrollbar{
+/* .admin .show::-webkit-scrollbar{
   display:none;
-}
+} */
 </style>

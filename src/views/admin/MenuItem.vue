@@ -1,6 +1,6 @@
 <template>
 <!-- 拥有二级菜单的 -->
-  <div class="menitem" :class="{ccc:true}">
+  <div class="menitem">
     <el-submenu
       v-if="routepat.children && routepat.children.length > 0"
       :index="routepat.path"
@@ -10,7 +10,7 @@
         <span v-show='!iscollapse'>{{ routepat.name }}</span>
       </template>
       <el-menu-item
-        v-for="(item, index) in seroutepat"
+        v-for="(item, index) in childroute[0].children"
         :key="index"
         :index="item.path"
       >
@@ -24,8 +24,12 @@
       :index="routepat.path"
     >
       <i :class="routepat.meta.icon"></i>
-      <span v-show='!iscollapse' :class='{show:iscollapse}'>{{ routepat.name }}</span>
+      <span v-show='!iscollapse'>{{ routepat.name }}</span>
     </el-menu-item>
+    <!-- <slot name='bbb'></slot>
+    <p>--------------------</p>
+    <slot name="ccc" :ppx='seroutepat'></slot> -->
+    
   </div>
 </template>
 
@@ -40,22 +44,26 @@ export default {
         return {};
       },
     },
+    childroute:{
+      type:Array,
+      defalut(){
+        return []
+      }
+    }
   },
   data() {
     return {
       // iscollapse:false
+      routepats:this.routepat
     };
   },
   computed: {
     // 数组形式
-    ...mapState(['iscollapse']),
+    // ...mapState(['iscollapse']),
     // 对象形式
     ...mapState({
       iscollapse:'iscollapse'
-    }),
-    seroutepat() {
-          return this.routepat.children;
-        }
+    })
   },
   watch:{
     iscollapse:{
@@ -65,6 +73,9 @@ export default {
         console.log(nw)
       }
     }
+  },
+  created(){
+    
   },
   methods:{
     // 对象形式

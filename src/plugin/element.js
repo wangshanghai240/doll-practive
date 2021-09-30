@@ -21,7 +21,7 @@ import {
     // Slider,
     // Icon,
     Upload,
-    // Progress,
+    Progress,
     // Collapse,
     // CollapseItem,
     // Cascader,
@@ -56,7 +56,7 @@ const element = {
         // Vue.use(Slider);
         // Vue.use(Icon);
         Vue.use(Upload);
-        // Vue.use(Progress);
+        Vue.use(Progress);
         // Vue.use(Collapse);
         // Vue.use(CollapseItem);
         // Vue.use(Cascader);
