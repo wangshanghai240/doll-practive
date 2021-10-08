@@ -94,11 +94,11 @@ export default {
           if (this.token) {
             console.log(this.token);
             this.$router.replace({
-              path: "/admin",
+              path: "admin",
               // 登录携带参数
               query:{
-                username:this.ruleForm.username,
-                password:this.ruleForm.pwd
+                name:this.ruleForm.username,
+                pwd:this.ruleForm.pwd
               }
             });
           }

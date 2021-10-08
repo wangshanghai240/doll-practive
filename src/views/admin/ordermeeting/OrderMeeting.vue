@@ -26,6 +26,7 @@ import {
   getAllOrderMeeting,
 } from "network/ordermeeting/ordermeeting";
 import { queryinfo } from "mixins/queryinfo";
+
 import OrderSearch from "views/admin/ordermeeting/ordermee/OrderSearch.vue";
 import OrderTab from "./ordermee/OrderTab.vue";
 import Pagination from "components/common/Pagination.vue";
@@ -79,21 +80,23 @@ export default {
     },
     // 模糊查询功能
     searchdata(search) {
+      console.log(this.orderlist)
       // this.orderlist.map((item)=>{
       //   if(item.name.indexOf(search) != -1){
       //     this.orderlist = [item]
       //   }
       // })
       // 方式一：
-      this.orderlist.map((item) => {
+      let neworderlist = this.orderlist.map((item) => {
         // 将搜索匹配到的所有结果
         if (item.name.indexOf(search) > -1) {
           // push到list中
           this.list.push(item);
         }
-        this.orderlist = this.list;
+        // this.orderlist = this.list;
         
       });
+      this.orderlist = neworderlist
       this.list = []
       console.log(this.orderlist);
       if (this.orderlist.length !== 0) {
